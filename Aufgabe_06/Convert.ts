@@ -2,7 +2,20 @@ console.log(process.argv);
 let baseFrom: number = parseInt(process.argv[3]);
 let baseTo: number = parseInt(process.argv[4]);
 console.log(baseFrom, baseTo);
-let num: number = parseInt(process.argv[2], baseTo);
+
+let num: string = process.argv[2];
+switch(num) {
+    case A:
+      num
+      break;
+    case y:
+      // code block
+      break;
+    default:
+      // code block
+  }
+
+let decimal: number = parseInt(process.argv[2], baseTo);
 console.log(num);
 
 
