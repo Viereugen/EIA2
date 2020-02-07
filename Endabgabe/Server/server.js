@@ -1,0 +1,1 @@
+console.log("Test ob der Server funktioniert");
