@@ -1,15 +1,15 @@
-use strict";
+"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Http = require("http");
 const Url = require("url");
 const Mongo = require("mongodb");
-var L07_CocktailBar;
-(function (L07_CocktailBar) {
+var Endabgabe;
+(function (Endabgabe) {
     let orders;
     let port = process.env.PORT;
     if (port == undefined)
         port = 5001;
-    let databaseUrl = "mongodb://localhost:27017";
+    let databaseUrl = "mongodb://localhost:27017"; // Mongo DB Account !!
     startServer(port);
     connectToDatabase(databaseUrl);
     function startServer(_port) {
@@ -22,7 +22,7 @@ var L07_CocktailBar;
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        orders = mongoClient.db("CocktailBar").collection("Orders");
+        orders = mongoClient.db("CocktailBar").collection("Orders"); // anderer name für datenbank und für collection
         console.log("Database connection ", orders != undefined);
     }
     function handleRequest(_request, _response) {
@@ -43,5 +43,5 @@ var L07_CocktailBar;
     function storeOrder(_order) {
         orders.insert(_order);
     }
-})(L07_CocktailBar = exports.L07_CocktailBar || (exports.L07_CocktailBar = {}));
-//# sourceMappingURL=Server.js.map
+})(Endabgabe = exports.Endabgabe || (exports.Endabgabe = {}));
+//# sourceMappingURL=server.js.map
