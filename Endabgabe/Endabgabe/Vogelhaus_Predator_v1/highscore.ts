@@ -4,12 +4,10 @@ namespace Endabgabe {
     let url: string = "https://eiatestapp.herokuapp.com/";
 
     function handleLoad(_event: Event): void {
-    console.log(" highscore.ts fängt an");
-    document.getElementById("highscoreButton").addEventListener("click", handleRetriveHS);
-
+    document.getElementById("highscoreButton").addEventListener("click", displayHighScore);
     }
 
-    async function handleRetriveHS(_event: Event): Promise<void> {
+    async function displayHighScore(_event: Event): Promise<void> {
         let query: string = "command=retrieve";
         let response: Response = await fetch(url + "?" + query);
         let responseText: string = await response.text();

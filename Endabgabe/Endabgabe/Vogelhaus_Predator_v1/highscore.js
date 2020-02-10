@@ -4,10 +4,9 @@ var Endabgabe;
     window.addEventListener("load", handleLoad);
     let url = "https://eiatestapp.herokuapp.com/";
     function handleLoad(_event) {
-        console.log(" highscore.ts fängt an");
-        document.getElementById("highscoreButton").addEventListener("click", handleRetriveHS);
+        document.getElementById("highscoreButton").addEventListener("click", displayHighScore);
     }
-    async function handleRetriveHS(_event) {
+    async function displayHighScore(_event) {
         let query = "command=retrieve";
         let response = await fetch(url + "?" + query);
         let responseText = await response.text();
