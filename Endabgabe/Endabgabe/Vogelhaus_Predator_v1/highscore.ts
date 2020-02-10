@@ -4,7 +4,7 @@ namespace Endabgabe {
     let url: string = "https://eiatestapp.herokuapp.com/";
 
     function handleLoad(_event: Event): void {
-    console.log(" highscore.ts fängt an")
+    console.log(" highscore.ts fängt an");
     document.getElementById("highscoreButton").addEventListener("click", handleRetriveHS);
 
     }
