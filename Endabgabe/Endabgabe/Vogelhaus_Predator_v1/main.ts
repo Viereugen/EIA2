@@ -200,10 +200,10 @@ namespace Endabgabe {
     }
 
 
-    function sendHighScore(_name: string, _highscore: number): void {
+    async function sendHighScore(_name: string, _highscore: number): Promise<void> {
         let query: string = "highscore=" + _highscore + "&name=" + _name;
-        let response: Promise<Response> = fetch(url + "?" + query);
-        let responseText: Promise<string> = response.text();
+        let response: Response = await fetch(url + "?" + query);
+        let responseText: string = await response.text();
         alert(response);
     }
 }

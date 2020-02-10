@@ -163,10 +163,10 @@ var Endabgabe;
         }
         window.open("https://viereugen.github.io/EIA2/Endabgabe/Endabgabe/Vogelhaus_Predator_v1/startseite.html", "_self");
     }
-    function sendHighScore(_name, _highscore) {
+    async function sendHighScore(_name, _highscore) {
         let query = "highscore=" + _highscore + "&name=" + _name;
-        let response = fetch(url + "?" + query);
-        let responseText = response.text();
+        let response = await fetch(url + "?" + query);
+        let responseText = await response.text();
         alert(response);
     }
 })(Endabgabe || (Endabgabe = {}));
