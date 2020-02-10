@@ -42,7 +42,7 @@ namespace Endabgabe {
         canvas.addEventListener("click", useSlingshot);
         canvas.addEventListener("auxclick", throwFood); // nach rechtsklick suchen
 
-        window.setTimeout(endTheGame, 20000);
+        window.setTimeout(endTheGame, 5000);
 
         window.setInterval(update, 20, background); // triggert alle 20ms die update-Funktion für den Hintergrund & neue Position der animierten Elemente
     }
