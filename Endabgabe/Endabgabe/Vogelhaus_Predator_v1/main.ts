@@ -197,14 +197,14 @@ namespace Endabgabe {
             sendHighScore(name, highscore);
             //self das es 
         }
-        window.open("https://viereugen.github.io/EIA2/Endabgabe/Endabgabe/Vogelhaus_Predator_v1/startseite.html");
+        window.open("https://viereugen.github.io/EIA2/Endabgabe/Endabgabe/Vogelhaus_Predator_v1/startseite.html", "_self") ;
     }
 
 
     function sendHighScore(_name: string, _highscore: number): void {
         let query: string = "highscore=" + _highscore + "&name=" + _name;
         let response: Promise<Response> = fetch(url + "?" + query);
-        //let responseText: Promise<string> = response.text();
+        let responseText: Promise<string> = response.text();
         alert(response);
     }
 }

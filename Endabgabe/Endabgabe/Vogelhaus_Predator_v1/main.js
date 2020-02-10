@@ -162,12 +162,12 @@ var Endabgabe;
             sendHighScore(name, Endabgabe.highscore);
             //self das es 
         }
-        window.open("https://viereugen.github.io/EIA2/Endabgabe/Endabgabe/Vogelhaus_Predator_v1/startseite.html");
+        window.open("https://viereugen.github.io/EIA2/Endabgabe/Endabgabe/Vogelhaus_Predator_v1/startseite.html", "_self");
     }
     function sendHighScore(_name, _highscore) {
         let query = "highscore=" + _highscore + "&name=" + _name;
         let response = fetch(url + "?" + query);
-        //let responseText: Promise<string> = response.text();
+        let responseText = response.text();
         alert(response);
     }
 })(Endabgabe || (Endabgabe = {}));
