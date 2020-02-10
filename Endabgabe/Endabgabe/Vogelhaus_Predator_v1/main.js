@@ -167,7 +167,7 @@ var Endabgabe;
         let query = "highscore=" + _highscore + "&name=" + _name;
         let response = await fetch(url + "?" + query);
         let responseText = await response.text();
-        alert(response);
+        alert(responseText);
     }
 })(Endabgabe || (Endabgabe = {}));
 //# sourceMappingURL=main.js.map

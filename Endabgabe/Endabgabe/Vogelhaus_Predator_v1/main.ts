@@ -204,6 +204,6 @@ namespace Endabgabe {
         let query: string = "highscore=" + _highscore + "&name=" + _name;
         let response: Response = await fetch(url + "?" + query);
         let responseText: string = await response.text();
-        alert(response);
+        alert(responseText);
     }
 }
