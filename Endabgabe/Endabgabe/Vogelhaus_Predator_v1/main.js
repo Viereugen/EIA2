@@ -166,8 +166,8 @@ var Endabgabe;
     async function sendHighScore(_name, _highscore) {
         let query = "highscore=" + _highscore + "&name=" + _name;
         let response = await fetch(url + "?" + query);
-        let responseText = await response.text();
-        alert(responseText);
+        // let responseText: string = await response.text();
+        alert(response);
     }
 })(Endabgabe || (Endabgabe = {}));
 //# sourceMappingURL=main.js.map

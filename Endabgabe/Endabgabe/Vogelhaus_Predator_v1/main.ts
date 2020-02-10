@@ -203,7 +203,7 @@ namespace Endabgabe {
     async function sendHighScore(_name: string, _highscore: number): Promise<void> {
         let query: string = "highscore=" + _highscore + "&name=" + _name;
         let response: Response = await fetch(url + "?" + query);
-        let responseText: string = await response.text();
-        alert(responseText);
+        // let responseText: string = await response.text();
+        alert(response);
     }
 }
