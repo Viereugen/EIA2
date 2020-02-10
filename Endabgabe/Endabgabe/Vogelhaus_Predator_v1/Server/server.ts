@@ -8,7 +8,7 @@ export namespace Endabgabe {
     let databaseURL: string;
 
     let dbName: string = "Endabgabe_Datenbank";
-    let dbCollection: string = "highscore";
+    let dbCollection: string = "Highscore";
 
     databaseURL = "mongodb+srv://TestUser:12345@cluster0-y7gg3.mongodb.net/test?retryWrites=true&w=majority";
   

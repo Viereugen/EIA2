@@ -8,7 +8,7 @@ var Endabgabe;
     let highscore;
     let databaseURL;
     let dbName = "Endabgabe_Datenbank";
-    let dbCollection = "highscore";
+    let dbCollection = "Highscore";
     databaseURL = "mongodb+srv://TestUser:12345@cluster0-y7gg3.mongodb.net/test?retryWrites=true&w=majority";
     let port = process.env.PORT;
     if (port == undefined)
