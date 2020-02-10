@@ -197,7 +197,7 @@ namespace Endabgabe {
             sendHighScore(name, highscore);
             //self das es 
         }
-        window.open("https://melreinhardt.github.io/mrhdt.eia2/Vogelhaus/startingPage.html", "_self");
+        window.open("https://viereugen.github.io/EIA2/Endabgabe/Endabgabe/Vogelhaus_Predator_v1/index.html");
     }
 
 
