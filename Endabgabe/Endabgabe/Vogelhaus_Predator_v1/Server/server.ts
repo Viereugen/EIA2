@@ -13,7 +13,7 @@ export namespace Endabgabe {
     if (port == undefined)
         port = 5001;
 
-    let databaseUrl: string = "mongodb://localhost:27017"; // Mongo DB Account !!
+    let databaseUrl: string = "mongodb+srv://TestUser:12345@cluster0-y7gg3.mongodb.net/test?retryWrites=true&w=majority"; // Mongo DB Account !!
 
     startServer(port);
     connectToDatabase(databaseUrl);
@@ -30,7 +30,7 @@ export namespace Endabgabe {
         let options: Mongo.MongoClientOptions = {useNewUrlParser: true, useUnifiedTopology: true};
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        orders = mongoClient.db("CocktailBar").collection("Orders"); // anderer name für datenbank und für collection
+        orders = mongoClient.db("Endabgabe_Datenbank").collection("HighScore"); // anderer name für datenbank und für collection
         console.log("Database connection ", orders != undefined);
     }
 

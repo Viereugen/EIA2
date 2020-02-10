@@ -9,7 +9,7 @@ var Endabgabe;
     let port = process.env.PORT;
     if (port == undefined)
         port = 5001;
-    let databaseUrl = "mongodb://localhost:27017"; // Mongo DB Account !!
+    let databaseUrl = "mongodb+srv://TestUser:12345@cluster0-y7gg3.mongodb.net/test?retryWrites=true&w=majority"; // Mongo DB Account !!
     startServer(port);
     connectToDatabase(databaseUrl);
     function startServer(_port) {
@@ -22,7 +22,7 @@ var Endabgabe;
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        orders = mongoClient.db("CocktailBar").collection("Orders"); // anderer name für datenbank und für collection
+        orders = mongoClient.db("Endabgabe_Datenbank").collection("HighScore"); // anderer name für datenbank und für collection
         console.log("Database connection ", orders != undefined);
     }
     function handleRequest(_request, _response) {
