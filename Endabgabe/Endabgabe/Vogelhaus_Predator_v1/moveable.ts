@@ -5,7 +5,6 @@ namespace Endabgabe {
         isHit: boolean;
         isLured: boolean;
         score: number;
-        isPartyBird: boolean; 
 
         constructor() {
             // console.log("constructed");   

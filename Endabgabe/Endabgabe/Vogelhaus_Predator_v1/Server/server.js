@@ -3,12 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Http = require("http");
 const Url = require("url");
 const Mongo = require("mongodb");
-var MyFuwa_last;
-(function (MyFuwa_last) {
+var Endabgabe;
+(function (Endabgabe) {
     let highscore;
     let databaseURL;
     let dbName = "Endabgabe_Datenbank";
-    let dbCollection = "highscore";
+    let dbCollection = "Highscore";
     databaseURL = "mongodb+srv://TestUser:12345@cluster0-y7gg3.mongodb.net/test?retryWrites=true&w=majority";
     let port = process.env.PORT;
     if (port == undefined)
@@ -65,7 +65,7 @@ var MyFuwa_last;
         else
             return "We encountered tecnical problems. Please try again later";
     }
-})(MyFuwa_last = exports.MyFuwa_last || (exports.MyFuwa_last = {}));
+})(Endabgabe = exports.Endabgabe || (exports.Endabgabe = {}));
 // import * as Http from "http";
 // import * as Url from "url";
 // import * as Mongo from "mongodb";

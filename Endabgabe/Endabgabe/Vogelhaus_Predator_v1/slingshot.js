@@ -25,9 +25,6 @@ var Endabgabe;
                     if (moveable instanceof Endabgabe.Bird) {
                         moveable.hitBird(this.aim);
                     }
-                    if (moveable instanceof Endabgabe.PartyBird) {
-                        moveable.hitPartyBird(this.aim);
-                    }
                 }
                 setTimeout(Endabgabe.deleteSlingshot, 500);
             }

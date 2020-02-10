@@ -80,12 +80,7 @@ namespace Endabgabe {
                     highscore += moveables[i].score;
                     console.log("Your Highscore: " + highscore);
                 }
-                if (moveables[i].isHit && moveables[i].isPartyBird) {
-                    moveables[i].score = 50;
-                    highscore += moveables[i].score;
-                    console.log("Your Highscore: " + highscore);
-                }
-                if (!moveables[i].isLured && !moveables[i].isPartyBird) {
+                if (!moveables[i].isLured) {
                     moveables[i].score = 20;
                     highscore += moveables[i].score;
                     console.log("Your Highscore: " + highscore);
@@ -186,9 +181,6 @@ namespace Endabgabe {
 
         for (let moveable of moveables) {
             if (moveable instanceof Bird && moveable.isHit) {
-                deleteBird();
-            }
-            if (moveable instanceof PartyBird && moveable.isHit) {
                 deleteBird();
             }
         }

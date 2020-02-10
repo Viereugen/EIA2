@@ -61,12 +61,7 @@ var Endabgabe;
                     Endabgabe.highscore += Endabgabe.moveables[i].score;
                     console.log("Your Highscore: " + Endabgabe.highscore);
                 }
-                if (Endabgabe.moveables[i].isHit && Endabgabe.moveables[i].isPartyBird) {
-                    Endabgabe.moveables[i].score = 50;
-                    Endabgabe.highscore += Endabgabe.moveables[i].score;
-                    console.log("Your Highscore: " + Endabgabe.highscore);
-                }
-                if (!Endabgabe.moveables[i].isLured && !Endabgabe.moveables[i].isPartyBird) {
+                if (!Endabgabe.moveables[i].isLured) {
                     Endabgabe.moveables[i].score = 20;
                     Endabgabe.highscore += Endabgabe.moveables[i].score;
                     console.log("Your Highscore: " + Endabgabe.highscore);
@@ -153,9 +148,6 @@ var Endabgabe;
         }
         for (let moveable of Endabgabe.moveables) {
             if (moveable instanceof Endabgabe.Bird && moveable.isHit) {
-                deleteBird();
-            }
-            if (moveable instanceof Endabgabe.PartyBird && moveable.isHit) {
                 deleteBird();
             }
         }
