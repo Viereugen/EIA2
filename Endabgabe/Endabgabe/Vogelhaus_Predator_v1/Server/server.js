@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Http = require("http");
 const Url = require("url");
-const Mongo = require("mongodb");
+// import * as Mongo from "mongodb";
 var Endabgabe;
 (function (Endabgabe) {
     let orders;
