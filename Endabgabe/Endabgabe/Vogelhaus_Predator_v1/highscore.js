@@ -4,6 +4,7 @@ var Endabgabe;
     window.addEventListener("load", handleLoad);
     let url = "https://eiatestapp.herokuapp.com/";
     function handleLoad(_event) {
+        console.log(" highscore.ts fängt an");
         document.getElementById("highscoreButton").addEventListener("click", handleRetriveHS);
     }
     async function handleRetriveHS(_event) {
