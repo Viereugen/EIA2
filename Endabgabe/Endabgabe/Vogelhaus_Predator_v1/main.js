@@ -30,6 +30,7 @@ var Endabgabe;
         drawSlingshot();
         canvas.addEventListener("click", useSlingshot);
         canvas.addEventListener("auxclick", throwFood); // nach rechtsklick suchen
+        window.setTimeout(endTheGame, 20000);
         window.setInterval(update, 20, background); // triggert alle 20ms die update-Funktion für den Hintergrund & neue Position der animierten Elemente
     }
     function drawBirds(nBirds) {
@@ -154,6 +155,20 @@ var Endabgabe;
         Endabgabe.showScore();
         // drawSlingshotWoodenPart({ x: crc2.canvas.width - 55, y: crc2.canvas.height + 70 });
         // showScore();
+    }
+    function endTheGame() {
+        let name = prompt("Your Score " + Endabgabe.highscore, "Please enter your name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
+        if (name != null) {
+            sendHighScore(name, Endabgabe.highscore);
+            //self das es 
+        }
+        window.open("https://melreinhardt.github.io/mrhdt.eia2/Vogelhaus/startingPage.html", "_self");
+    }
+    function sendHighScore(_name, _highscore) {
+        let query = "highscore=" + _highscore + "&name=" + _name;
+        let response = fetch(url + "?" + query);
+        //let responseText: Promise<string> = response.text();
+        alert(response);
     }
 })(Endabgabe || (Endabgabe = {}));
 //# sourceMappingURL=main.js.map

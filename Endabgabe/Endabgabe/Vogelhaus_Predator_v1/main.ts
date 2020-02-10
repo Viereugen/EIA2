@@ -33,7 +33,7 @@ namespace Endabgabe {
         // drawBirdsInTree({ x: 510, y: 400 }, { x: 180, y: 120 });
         //showScore();
 
-        let background: ImageData = crc2.getImageData(0, 0, 800, 600); 
+        let background: ImageData = crc2.getImageData(0, 0, 800, 600);
 
         drawBirds(25);
         drawSnowflakes(100);
@@ -41,6 +41,8 @@ namespace Endabgabe {
         drawSlingshot();
         canvas.addEventListener("click", useSlingshot);
         canvas.addEventListener("auxclick", throwFood); // nach rechtsklick suchen
+
+        window.setTimeout(endTheGame, 20000);
 
         window.setInterval(update, 20, background); // triggert alle 20ms die update-Funktion für den Hintergrund & neue Position der animierten Elemente
     }
@@ -123,7 +125,7 @@ namespace Endabgabe {
 
         console.log("Food thrown.");
         //console.log(_event);
-    
+
         let _mousePosition: Vector = new Vector(_event.clientX, _event.clientY);
         for (let moveable of moveables) {
             if (moveable instanceof Bird && moveable.isLured) {
@@ -187,5 +189,22 @@ namespace Endabgabe {
         showScore();
         // drawSlingshotWoodenPart({ x: crc2.canvas.width - 55, y: crc2.canvas.height + 70 });
         // showScore();
+    }
+
+    function endTheGame(): void {
+        let name: any = prompt("Your Score " + highscore, "Please enter your name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
+        if (name != null) {
+            sendHighScore(name, highscore);
+            //self das es 
+        }
+        window.open("https://melreinhardt.github.io/mrhdt.eia2/Vogelhaus/startingPage.html", "_self");
+    }
+
+
+    function sendHighScore(_name: string, _highscore: number): void {
+        let query: string = "highscore=" + _highscore + "&name=" + _name;
+        let response: Promise<Response> = fetch(url + "?" + query);
+        //let responseText: Promise<string> = response.text();
+        alert(response);
     }
 }
