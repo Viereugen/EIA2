@@ -75,31 +75,6 @@ namespace Endabgabe {
             }
         }
 
-        deleteBird(): void {                    //vllt verschieben
-            for (let i: number = 0; i < moveables.length; i++) {
-                if (moveables[i].isHit) {
-                    if (moveables[i].isHit && moveables[i].isLured) {
-                        moveables[i].score = 10;
-                        highscore += moveables[i].score;
-                        console.log("Your Highscore: " + highscore);
-                    }
-                    if (moveables[i].isHit && moveables[i].isPartyBird) {
-                        moveables[i].score = 50;
-                        highscore += moveables[i].score;
-                        console.log("Your Highscore: " + highscore);
-                    }
-                    if (!moveables[i].isLured && !moveables[i].isPartyBird) {
-                        moveables[i].score = 20;
-                        highscore += moveables[i].score;
-                        console.log("Your Highscore: " + highscore);
-                    }
-                    moveables.splice(i, 1);
-                    console.log("Bird was hit and killed!");
-                }
-            }
-        }
-
-
         draw(): void {
 
             //sitzende/laufende Vögel

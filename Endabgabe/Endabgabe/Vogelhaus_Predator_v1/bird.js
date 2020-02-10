@@ -60,29 +60,6 @@ var Endabgabe;
                 console.log("Bird is hit: " + this.isHit);
             }
         }
-        deleteBird() {
-            for (let i = 0; i < Endabgabe.moveables.length; i++) {
-                if (Endabgabe.moveables[i].isHit) {
-                    if (Endabgabe.moveables[i].isHit && Endabgabe.moveables[i].isLured) {
-                        Endabgabe.moveables[i].score = 10;
-                        Endabgabe.highscore += Endabgabe.moveables[i].score;
-                        console.log("Your Highscore: " + Endabgabe.highscore);
-                    }
-                    if (Endabgabe.moveables[i].isHit && Endabgabe.moveables[i].isPartyBird) {
-                        Endabgabe.moveables[i].score = 50;
-                        Endabgabe.highscore += Endabgabe.moveables[i].score;
-                        console.log("Your Highscore: " + Endabgabe.highscore);
-                    }
-                    if (!Endabgabe.moveables[i].isLured && !Endabgabe.moveables[i].isPartyBird) {
-                        Endabgabe.moveables[i].score = 20;
-                        Endabgabe.highscore += Endabgabe.moveables[i].score;
-                        console.log("Your Highscore: " + Endabgabe.highscore);
-                    }
-                    Endabgabe.moveables.splice(i, 1);
-                    console.log("Bird was hit and killed!");
-                }
-            }
-        }
         draw() {
             //sitzende/laufende Vögel
             if (this.position.y >= 400) {
