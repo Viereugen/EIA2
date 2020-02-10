@@ -195,9 +195,8 @@ namespace Endabgabe {
         let name: any = prompt("Your Score " + highscore, "Please enter your name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
         if (name != null) {
             sendHighScore(name, highscore);
-            //self das es 
         }
-        window.open("https://viereugen.github.io/EIA2/Endabgabe/Endabgabe/Vogelhaus_Predator_v1/startseite.html", "_self") ;
+        window.open("https://viereugen.github.io/EIA2/Endabgabe/Endabgabe/Vogelhaus_Predator_v1/startseite.html", "_self");
     }
 
 

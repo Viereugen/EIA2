@@ -160,7 +160,6 @@ var Endabgabe;
         let name = prompt("Your Score " + Endabgabe.highscore, "Please enter your name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
         if (name != null) {
             sendHighScore(name, Endabgabe.highscore);
-            //self das es 
         }
         window.open("https://viereugen.github.io/EIA2/Endabgabe/Endabgabe/Vogelhaus_Predator_v1/startseite.html", "_self");
     }
