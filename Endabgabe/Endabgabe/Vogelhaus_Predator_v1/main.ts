@@ -34,6 +34,7 @@ namespace Endabgabe {
         drawBirds(25);
         drawSnowflakes(100);
         drawSnowball();
+        
         canvas.addEventListener("click", throwSnowball);
         canvas.addEventListener("auxclick", throwFood);
 
