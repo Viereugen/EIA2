@@ -26,10 +26,8 @@ var Endabgabe;
                 }
                 setTimeout(Endabgabe.deleteSnowball, 500);
             }
-            // drawTarget(this.aim);
         }
         draw() {
-            //console.log("drawn");
             Endabgabe.crc2.beginPath();
             Endabgabe.crc2.save();
             Endabgabe.crc2.translate(this.position.x, this.position.y);

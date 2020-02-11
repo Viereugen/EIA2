@@ -31,14 +31,12 @@ var Endabgabe;
         window.setInterval(update, 20, background); // Update alle 20 ms
     }
     function drawSnowflakes(nSnowflakes) {
-        console.log("Snowflakes.");
         for (let i = 0; i < nSnowflakes; i++) {
             let snowflake = new Endabgabe.Snowflake();
             Endabgabe.moveables.push(snowflake);
         }
     }
     function drawBirds(nBirds) {
-        console.log("(Hotdog) birds.");
         for (let i = 0; i < nBirds; i++) {
             let bird = new Endabgabe.Bird();
             Endabgabe.moveables.push(bird);
@@ -49,7 +47,7 @@ var Endabgabe;
             let bird = Endabgabe.moveables[i]; // typecast von Moveables zu Bird
             if (bird.isHit) {
                 Endabgabe.highscore += 20;
-                if (bird.isEating && bird.isLured) {
+                if (bird.isEating && bird.isHungry) {
                     Endabgabe.highscore -= 15;
                     console.log("Your Highscore: " + Endabgabe.highscore);
                 }
@@ -82,11 +80,11 @@ var Endabgabe;
     }
     Endabgabe.deleteSnowball = deleteSnowball;
     function throwFood(_event) {
-        console.log("Food was thrown");
+        console.log("Food thrown");
         if (_event.clientY >= 400 && Endabgabe.highscore >= 20) {
             let _mousePosition = new Endabgabe.Vector(_event.clientX, _event.clientY);
             for (let moveable of Endabgabe.moveables) {
-                if (moveable instanceof Endabgabe.Bird && moveable.isLured) {
+                if (moveable instanceof Endabgabe.Bird && moveable.isHungry) {
                     moveable.getFood(_mousePosition);
                 }
             }
@@ -104,6 +102,18 @@ var Endabgabe;
             }
         }
     }
+    function endTheGame() {
+        let name = prompt("Your Score: " + Endabgabe.highscore + "\nEnter your Name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
+        if (name != null) {
+            sendHighScore(name, Endabgabe.highscore);
+        }
+        window.open("https://viereugen.github.io/EIA2/Endabgabe/Endabgabe/Vogelhaus_Predator_v1/startseite.html", "_self");
+    }
+    async function sendHighScore(_name, _highscore) {
+        let query = "highscore=" + _highscore + "&name=" + _name;
+        let response = await fetch(url + "?" + query);
+        alert(response);
+    }
     function update(_background) {
         Endabgabe.crc2.putImageData(_background, 0, 0);
         for (let moveable of Endabgabe.moveables) {
@@ -111,7 +121,7 @@ var Endabgabe;
             moveable.draw();
         }
         for (let moveable of Endabgabe.moveables) {
-            if (moveable instanceof Endabgabe.Bird && moveable.isLured) {
+            if (moveable instanceof Endabgabe.Bird && moveable.isHungry) {
                 moveable.eatFood();
             }
         }
@@ -126,18 +136,6 @@ var Endabgabe;
             }
         }
         Endabgabe.drawScore();
-    }
-    function endTheGame() {
-        let name = prompt("Your Score " + Endabgabe.highscore + "Please enter your name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
-        if (name != null) {
-            sendHighScore(name, Endabgabe.highscore);
-        }
-        window.open("https://viereugen.github.io/EIA2/Endabgabe/Endabgabe/Vogelhaus_Predator_v1/startseite.html", "_self");
-    }
-    async function sendHighScore(_name, _highscore) {
-        let query = "highscore=" + _highscore + "&name=" + _name;
-        let response = await fetch(url + "?" + query);
-        alert(response);
     }
 })(Endabgabe || (Endabgabe = {}));
 //# sourceMappingURL=main.js.map

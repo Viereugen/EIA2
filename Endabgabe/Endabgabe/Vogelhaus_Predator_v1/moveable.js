@@ -24,7 +24,7 @@ var Endabgabe;
                 this.position.y -= Endabgabe.crc2.canvas.height;
         }
         draw() {
-            //console.log("Moveable drawn");
+            //console.log("draw");
         }
     }
     Endabgabe.Moveable = Moveable;

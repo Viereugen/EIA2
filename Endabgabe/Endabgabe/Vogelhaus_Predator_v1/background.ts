@@ -182,7 +182,6 @@ namespace Endabgabe {
 
         // Hole
         let hole: Path2D = new Path2D;
-
         hole.arc(155, 325, 10, 0, 2 * Math.PI);
         crc2.fillStyle = "black";
         crc2.fill(hole);
@@ -204,7 +203,6 @@ namespace Endabgabe {
     
     export function drawScore(): void {
         crc2.beginPath();
-        //crc2.fillStyle = "darkred";
         crc2.strokeRect(5, 5, 150, 40);
         crc2.font = "20px Arial";
         crc2.fillStyle = "white";

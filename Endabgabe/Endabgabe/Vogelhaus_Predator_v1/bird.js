@@ -4,18 +4,16 @@ var Endabgabe;
     class Bird extends Endabgabe.Moveable {
         constructor() {
             super();
-            // console.log("constructed");
-            // Geschwindigkeit & Richtung
+            // Speed & Direction
             this.velocity = new Endabgabe.Vector(Math.random() * -2, -1 + Math.random() * 3);
-            // Farbe für Vögel
             this.color = Bird.getRandomColor();
-            // anlockbare Vögel
-            if (Math.random() <= 0.2) {
-                this.isLured = true;
+            // hungrige Vögel
+            if (Math.random() <= 0.3) {
+                this.isHungry = true;
                 console.log("I am lured & hungry.");
             }
             else {
-                this.isLured = false;
+                this.isHungry = false;
             }
             this.isHit = false;
             this.isEating = false;
@@ -32,7 +30,6 @@ var Endabgabe;
             let newVelocityY = (_mousePosition.y - this.position.y) * 0.01;
             let newVelocity = new Endabgabe.Vector(newVelocityX, newVelocityY);
             this.velocity = newVelocity;
-            // console.log("Birds are lured to food.");
         }
         eatFood() {
             if (this.aim && this.isEating && (this.position == this.aim || (this.position.x <= this.aim.x + 12 && this.position.y <= this.aim.y + 12 && this.position.x >= this.aim.x - 12 && this.position.y >= this.aim.y - 12))) {
@@ -46,7 +43,7 @@ var Endabgabe;
             for (let i = 0; i <= Endabgabe.moveables.length; i++) {
                 if (Endabgabe.moveables[i] instanceof Bird) {
                     let bird = Endabgabe.moveables[i];
-                    if (bird.isLured) {
+                    if (bird.isHungry) {
                         let a = Math.random() * -4;
                         let b = 1 - Math.random() * 4;
                         bird.velocity = new Endabgabe.Vector(a, b);
@@ -63,42 +60,43 @@ var Endabgabe;
             }
         }
         draw() {
-            //sitzende/laufende Vögel
+            //laufende Vögel
             if (this.position.y >= 400) {
+                // Körper
                 Endabgabe.crc2.fillStyle = this.color;
                 Endabgabe.crc2.beginPath();
                 Endabgabe.crc2.save();
                 Endabgabe.crc2.translate(this.position.x, this.position.y);
                 Endabgabe.crc2.ellipse(28, 30, 40, 20, Math.PI / 2 - 10, 0, 2 * Math.PI);
                 Endabgabe.crc2.closePath();
+                // Kopf
                 Endabgabe.crc2.arc(10, 0, 14, 0, 2 * Math.PI);
                 Endabgabe.crc2.closePath();
                 Endabgabe.crc2.fill();
+                // Schnabel
                 Endabgabe.crc2.beginPath();
-                Endabgabe.crc2.moveTo(0, -5); // Strich
-                Endabgabe.crc2.lineTo(0, 5); // Ecke oben
+                Endabgabe.crc2.moveTo(0, -5);
+                Endabgabe.crc2.lineTo(0, 5); // Obere Ecke
                 Endabgabe.crc2.lineTo(-12, 8);
                 Endabgabe.crc2.closePath();
                 Endabgabe.crc2.fillStyle = "orange";
                 Endabgabe.crc2.fill();
+                // Füße
                 Endabgabe.crc2.beginPath();
-                Endabgabe.crc2.moveTo(30, 55); // Strich
-                Endabgabe.crc2.lineTo(30, 65); // Ecke oben
+                Endabgabe.crc2.moveTo(30, 55);
+                Endabgabe.crc2.lineTo(30, 65); // Obere Ecke
                 Endabgabe.crc2.lineTo(18, 68);
-                Endabgabe.crc2.moveTo(38, 55); // Strich
-                Endabgabe.crc2.lineTo(38, 65); // Ecke oben
+                Endabgabe.crc2.moveTo(38, 55);
+                Endabgabe.crc2.lineTo(38, 65); // Obere Ecke
                 Endabgabe.crc2.lineTo(28, 68);
                 Endabgabe.crc2.fillStyle = "black";
                 Endabgabe.crc2.stroke();
                 Endabgabe.crc2.restore();
                 Endabgabe.crc2.closePath();
-                // let directionCheck: Vector = this.velocity;
-                // if ( directionCheck.x > 0) {
-                //     console.log("Change direction?");
-                // }
             }
             // fliegende Vögel
             else {
+                // Körper
                 Endabgabe.crc2.fillStyle = this.color;
                 Endabgabe.crc2.beginPath();
                 Endabgabe.crc2.save();
@@ -106,12 +104,14 @@ var Endabgabe;
                 Endabgabe.crc2.ellipse(28, 30, 40, 20, 60, 0, 2 * Math.PI);
                 Endabgabe.crc2.arc(60, 20, 15, 0, 0.5 * Math.PI);
                 Endabgabe.crc2.closePath();
+                // Kopf
                 Endabgabe.crc2.arc(5, 5, 14, 0, 2 * Math.PI);
                 Endabgabe.crc2.closePath();
                 Endabgabe.crc2.fill();
+                // Schnabel
                 Endabgabe.crc2.beginPath();
-                Endabgabe.crc2.moveTo(-5, 0); // Strich
-                Endabgabe.crc2.lineTo(-5, 10); // Ecke oben
+                Endabgabe.crc2.moveTo(-5, 0);
+                Endabgabe.crc2.lineTo(-5, 10); // Obere Ecke
                 Endabgabe.crc2.lineTo(-20, 10);
                 Endabgabe.crc2.closePath();
                 Endabgabe.crc2.fillStyle = "orange";

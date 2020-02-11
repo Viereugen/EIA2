@@ -28,11 +28,9 @@ namespace Endabgabe {
                 }
                 setTimeout(deleteSnowball, 500);
             }
-            // drawTarget(this.aim);
         }
 
         draw(): void {
-            //console.log("drawn");
 
             crc2.beginPath();
             crc2.save();

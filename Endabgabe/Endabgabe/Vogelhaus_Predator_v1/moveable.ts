@@ -30,7 +30,7 @@ namespace Endabgabe {
             }
 
         draw(): void {
-            //console.log("Moveable drawn");
+            //console.log("draw");
         }
     }
 }

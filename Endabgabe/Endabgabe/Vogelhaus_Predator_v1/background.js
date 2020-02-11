@@ -158,7 +158,6 @@ var Endabgabe;
     Endabgabe.drawBirdhouse = drawBirdhouse;
     function drawScore() {
         Endabgabe.crc2.beginPath();
-        //crc2.fillStyle = "darkred";
         Endabgabe.crc2.strokeRect(5, 5, 150, 40);
         Endabgabe.crc2.font = "20px Arial";
         Endabgabe.crc2.fillStyle = "white";
