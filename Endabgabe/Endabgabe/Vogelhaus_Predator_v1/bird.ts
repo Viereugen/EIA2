@@ -3,6 +3,7 @@ namespace Endabgabe {
         color: string;
         aim: Vector;
         isLured: boolean;
+        isEating: boolean;
         isHit: boolean;
         score: number;
 
@@ -11,7 +12,8 @@ namespace Endabgabe {
             // console.log("constructed");
 
             // Geschwindigkeit & Richtung
-            this.velocity = new Vector(-1, 1);
+            
+            this.velocity = new Vector(Math.random() * -2, -1 + Math.random() * 3);
 
             // Farbe für Vögel
             this.color = Bird.getRandomColor();
@@ -24,6 +26,7 @@ namespace Endabgabe {
                 this.isLured = false;
             }
             this.isHit = false;
+            this.isEating = false;
         }
 
         static getRandomColor(): string {
@@ -35,6 +38,7 @@ namespace Endabgabe {
 
         getFood(_mousePosition: Vector): void {
             this.aim = _mousePosition;
+            this.isEating = true;
             let newVelocityX: number = (_mousePosition.x - this.position.x) * 0.01;
             let newVelocityY: number = (_mousePosition.y - this.position.y) * 0.01;
             let newVelocity: Vector = new Vector(newVelocityX, newVelocityY);
@@ -43,10 +47,9 @@ namespace Endabgabe {
         }
 
         eatFood(): void {
-            if (this.aim && (this.position == this.aim || (this.position.x <= this.aim.x + 12 && this.position.y <= this.aim.y + 12 && this.position.x >= this.aim.x - 12 && this.position.y >= this.aim.y - 12))) {
+            if (this.aim && this.isEating && (this.position == this.aim || (this.position.x <= this.aim.x + 12 && this.position.y <= this.aim.y + 12 && this.position.x >= this.aim.x - 12 && this.position.y >= this.aim.y - 12))) {
                 let stop: Vector = new Vector(0, 0);
                 this.velocity = stop;
-                // console.log("Birds stopped to eat.");
                 this.aim = new Vector(1000, 1000);
 
 
@@ -55,14 +58,16 @@ namespace Endabgabe {
         }
 
         changeDirection(): void {
-            for (let moveable of moveables) {
-                if (moveable instanceof Bird && moveable.isLured) {
-                    this.aim = new Vector(1000, 1000);
-                    // if (Math.random() * 5 < 0.07) {
-                    let a: number = Math.random() * 5;
-                    let b: number = Math.random() * 5;
-                    moveable.velocity = new Vector(a, b);
-                    // }
+            for (let i: number = 0; i <= moveables.length; i++) {
+
+                if (moveables[i] instanceof Bird) {
+                    let bird: Bird = moveables[i] as Bird;
+                    if (bird.isLured) {
+                        let a: number = Math.random() * -4;
+                        let b: number = 1 - Math.random() * 4;
+                        bird.velocity = new Vector(a, b);
+                        bird.isEating = false;
+                    }
                 }
             }
         }
@@ -114,6 +119,12 @@ namespace Endabgabe {
 
                 crc2.restore();
                 crc2.closePath();
+
+                // let directionCheck: Vector = this.velocity;
+                // if ( directionCheck.x > 0) {
+                //     console.log("Change direction?");
+                // }
+
             }
 
             // fliegende Vögel

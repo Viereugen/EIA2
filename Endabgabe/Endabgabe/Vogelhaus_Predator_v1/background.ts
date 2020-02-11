@@ -20,7 +20,7 @@ namespace Endabgabe {
         let r2: number = 100;
         let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, r1, 0, 0, r2);
 
-        gradient.addColorStop(0, "HSLA(90, 100%, 950%, 1");
+        gradient.addColorStop(0, "HSLA(90, 100%, 80%, 1");
         gradient.addColorStop(1, "HSLA(90, 100%, 40%, 0");
 
         crc2.save();
@@ -34,7 +34,7 @@ namespace Endabgabe {
     export function drawCloud(_position: VectorBack, _size: VectorBack): void {
         //console.log("Cloud" + _position, _size);
         let nParticles: number = 50;
-        let radiusParticle: number = 45;
+        let radiusParticle: number = 50;
         let particle: Path2D = new Path2D();
         let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
 
@@ -59,8 +59,8 @@ namespace Endabgabe {
     }
 
     export function drawMountains(_position: VectorBack, _min: number, _max: number, _colorHigh: string, _colorLow: string): void {
-        let stepMin: number = 30;
-        let stepMax: number = 40;
+        let stepMin: number = 50;
+        let stepMax: number = 70;
         let x: number = 0;
 
         crc2.save();
@@ -94,18 +94,18 @@ namespace Endabgabe {
         let transform: DOMMatrix = crc2.getTransform();
 
         let nBranches: number = 100;
-        let maxRadius: number = 30;
+        let maxRadius: number = 70;
         let branch: Path2D = new Path2D();
         branch.arc(200, 470, maxRadius, 0, 2 * Math.PI);
 
         crc2.fillStyle = "HSL(15, 90%, 20%)"; // Baumstamm
-        crc2.fillRect(180, 450, 30, -200);
+        crc2.fillRect(175, 450, 50, -200);
         crc2.save();
         crc2.translate(0, -120);
 
         do {
             let y: number = Math.random() * 250;
-            let x: number = (Math.random() - 0.5) * 6 * maxRadius;
+            let x: number = (Math.random() - 0.5) * 100;
 
             crc2.save();
             crc2.translate(0, -y);

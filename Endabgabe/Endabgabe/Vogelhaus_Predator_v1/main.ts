@@ -17,29 +17,26 @@ namespace Endabgabe {
     console.log("Your Highscore: " + highscore);
 
     function handleLoad(_event: Event): void {
-        let canvas: HTMLCanvasElement | null = document.querySelector("canvas");  //Nachschauen
+        let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
         if (!canvas)
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
         drawBackground();
         drawSun({ x: 700, y: 75 });
-        drawCloud({ x: 300, y: 125 }, { x: 350, y: 105 });
-        drawMountains({ x: 0, y: crc2.canvas.height * goldenRatio }, 80, 200, "white", "darkgreen");
-        drawMountains({ x: 0, y: crc2.canvas.height * goldenRatio }, 40, 180, "lightgrey", "grey");
+        drawCloud({ x: 300, y: 125 }, { x: 400, y: 100 });
+        drawMountains({ x: 0, y: crc2.canvas.height * goldenRatio }, 100, 200, "white", "darkgreen");
+        drawMountains({ x: 0, y: crc2.canvas.height * goldenRatio }, 50, 150, "lightgrey", "grey");
         drawTree();
-        drawSnowman({ x: 600, y: 500 });
         drawBirdhouse();
-        // drawBirdsInTree({ x: 510, y: 400 }, { x: 180, y: 120 });
-        //showScore();
+        drawSnowman({ x: 600, y: 500 });
 
         let background: ImageData = crc2.getImageData(0, 0, 800, 600);
 
         drawBirds(25);
         drawSnowflakes(100);
-        // drawPartyBird(3);
-        drawSlingshot();
-        canvas.addEventListener("click", useSlingshot);
+        drawSnowball();
+        canvas.addEventListener("click", throwSnowball);
         canvas.addEventListener("auxclick", throwFood); // nach rechtsklick suchen
 
         window.setTimeout(endTheGame, 20000);
@@ -65,26 +62,17 @@ namespace Endabgabe {
         }
     }
 
-    // function drawPartyBird(nBirds: number): void {
-    //     console.log("Party Bird.");
-    //     for (let i: number = 0; i < nBirds; i++) {
-    //         let partyBird: PartyBird = new PartyBird();
-    //         moveables.push(partyBird);
-    //     }
-    // }
 
-
-    export function deleteBird(): void {                    //vllt verschieben
+    export function deleteBird(): void {                
         for (let i: number = 0; i < moveables.length; i++) {
-            if (moveables[i].isHit) {
-                if (moveables[i].isHit && moveables[i].isLured) {
-                    moveables[i].score = 10;
-                    highscore += moveables[i].score;
+            let bird: Bird = moveables[i] as Bird; // typecast von Moveables zu Bird
+            if (bird.isHit) {
+                if (bird.isEating) {
+                    highscore += 10;
                     console.log("Your Highscore: " + highscore);
                 }
-                if (!moveables[i].isLured) {
-                    moveables[i].score = 20;
-                    highscore += moveables[i].score;
+                if (!bird.isLured) {
+                    highscore += 25;
                     console.log("Your Highscore: " + highscore);
                 }
                 moveables.splice(i, 1);
@@ -93,50 +81,49 @@ namespace Endabgabe {
         }
     }
 
-    function drawSlingshot(): void {
-        //console.log("Slingshot.");
-        let slingShot: Slingshot = new Slingshot();
-        moveables.push(slingShot);
+    function drawSnowball(): void {
+        let snowball: Snowball = new Snowball();
+        moveables.push(snowball);
     }
 
 
-    function useSlingshot(_event: MouseEvent): void {
-        console.log("Slingshot used.");
+    function throwSnowball(_event: MouseEvent): void {
+        console.log("Snowball thrown");
         let _mousePosition: Vector = new Vector(_event.clientX, _event.clientY);
         for (let moveable of moveables) {
-            if (moveable instanceof Slingshot) {
-                // console.log("Slingshot started.");
+            if (moveable instanceof Snowball) {
                 moveable.targetBird(_mousePosition);
             }
         }
     }
 
-    export function deleteSlingshot(): void {
+    export function deleteSnowball(): void {
         for (let i: number = 0; i < moveables.length; i++) {
-            if (moveables[i] instanceof Slingshot) {
+            if (moveables[i] instanceof Snowball) {
                 moveables.splice(i, 1);
                 // console.log("Sling was deleted.");
             }
         }
-        drawSlingshot();
+        drawSnowball();
     }
 
     function throwFood(_event: MouseEvent): void {
 
         console.log("Food thrown.");
         //console.log(_event);
-
-        let _mousePosition: Vector = new Vector(_event.clientX, _event.clientY);
-        for (let moveable of moveables) {
-            if (moveable instanceof Bird && moveable.isLured) {
-                //console.log(moveable.position);
-                moveable.getFood(_mousePosition);
+        if (_event.clientY >= 400 && highscore >= 20) {
+            let _mousePosition: Vector = new Vector(_event.clientX, _event.clientY);
+            for (let moveable of moveables) {
+                if (moveable instanceof Bird && moveable.isLured) {
+                    //console.log(moveable.position);
+                    moveable.getFood(_mousePosition);
+                }
             }
+            let food: Food = new Food(_mousePosition);
+            moveables.push(food);
+            highscore -= 20;
+            setTimeout(deleteFood, 3000);
         }
-        let food: Food = new Food(_mousePosition);
-        moveables.push(food);
-
-        setTimeout(deleteFood, 3000);
     }
 
     function deleteFood(): void {
@@ -148,20 +135,8 @@ namespace Endabgabe {
         }
     }
 
-    // function showScore(): void {
-    //     crc2.fillStyle = "#0f0f0f";
-    //     crc2.fillRect(700, 0, 200, 80);
-    //     crc2.font = "20px Typescript";
-    //     crc2.fillStyle = "white";
-    //     crc2.fillText("Score: ", 660, 25);
 
-    //     crc2.fillText("" + highscore, 720, 25);
-    //     crc2.font = "20px Typescript";
-    // }
-
-    // update Background & Animation
     function update(_background: ImageData): void {
-        //console.log("updated");
         crc2.putImageData(_background, 0, 0);
 
         for (let moveable of moveables) {
@@ -176,7 +151,7 @@ namespace Endabgabe {
         }
 
         for (let moveable of moveables) {
-            if (moveable instanceof Slingshot) {
+            if (moveable instanceof Snowball) {
                 moveable.reachedTarget();
             }
         }
@@ -187,8 +162,6 @@ namespace Endabgabe {
             }
         }
         showScore();
-        // drawSlingshotWoodenPart({ x: crc2.canvas.width - 55, y: crc2.canvas.height + 70 });
-        // showScore();
     }
 
     function endTheGame(): void {
@@ -203,7 +176,6 @@ namespace Endabgabe {
     async function sendHighScore(_name: string, _highscore: number): Promise<void> {
         let query: string = "highscore=" + _highscore + "&name=" + _name;
         let response: Response = await fetch(url + "?" + query);
-        // let responseText: string = await response.text();
         alert(response);
     }
 }

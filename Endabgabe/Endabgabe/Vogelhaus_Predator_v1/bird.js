@@ -6,7 +6,7 @@ var Endabgabe;
             super();
             // console.log("constructed");
             // Geschwindigkeit & Richtung
-            this.velocity = new Endabgabe.Vector(-1, 1);
+            this.velocity = new Endabgabe.Vector(Math.random() * -2, -1 + Math.random() * 3);
             // Farbe für Vögel
             this.color = Bird.getRandomColor();
             // anlockbare Vögel
@@ -18,6 +18,7 @@ var Endabgabe;
                 this.isLured = false;
             }
             this.isHit = false;
+            this.isEating = false;
         }
         static getRandomColor() {
             let colorAngle = Math.random() * 150;
@@ -26,6 +27,7 @@ var Endabgabe;
         }
         getFood(_mousePosition) {
             this.aim = _mousePosition;
+            this.isEating = true;
             let newVelocityX = (_mousePosition.x - this.position.x) * 0.01;
             let newVelocityY = (_mousePosition.y - this.position.y) * 0.01;
             let newVelocity = new Endabgabe.Vector(newVelocityX, newVelocityY);
@@ -33,23 +35,23 @@ var Endabgabe;
             // console.log("Birds are lured to food.");
         }
         eatFood() {
-            if (this.aim && (this.position == this.aim || (this.position.x <= this.aim.x + 12 && this.position.y <= this.aim.y + 12 && this.position.x >= this.aim.x - 12 && this.position.y >= this.aim.y - 12))) {
+            if (this.aim && this.isEating && (this.position == this.aim || (this.position.x <= this.aim.x + 12 && this.position.y <= this.aim.y + 12 && this.position.x >= this.aim.x - 12 && this.position.y >= this.aim.y - 12))) {
                 let stop = new Endabgabe.Vector(0, 0);
                 this.velocity = stop;
-                // console.log("Birds stopped to eat.");
                 this.aim = new Endabgabe.Vector(1000, 1000);
                 setTimeout(this.changeDirection, 1300);
             }
         }
         changeDirection() {
-            for (let moveable of Endabgabe.moveables) {
-                if (moveable instanceof Bird && moveable.isLured) {
-                    this.aim = new Endabgabe.Vector(1000, 1000);
-                    // if (Math.random() * 5 < 0.07) {
-                    let a = Math.random() * 5;
-                    let b = Math.random() * 5;
-                    moveable.velocity = new Endabgabe.Vector(a, b);
-                    // }
+            for (let i = 0; i <= Endabgabe.moveables.length; i++) {
+                if (Endabgabe.moveables[i] instanceof Bird) {
+                    let bird = Endabgabe.moveables[i];
+                    if (bird.isLured) {
+                        let a = Math.random() * -4;
+                        let b = 1 - Math.random() * 4;
+                        bird.velocity = new Endabgabe.Vector(a, b);
+                        bird.isEating = false;
+                    }
                 }
             }
         }
@@ -90,6 +92,10 @@ var Endabgabe;
                 Endabgabe.crc2.stroke();
                 Endabgabe.crc2.restore();
                 Endabgabe.crc2.closePath();
+                // let directionCheck: Vector = this.velocity;
+                // if ( directionCheck.x > 0) {
+                //     console.log("Change direction?");
+                // }
             }
             // fliegende Vögel
             else {

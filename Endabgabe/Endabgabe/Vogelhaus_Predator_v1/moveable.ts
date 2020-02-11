@@ -2,9 +2,6 @@ namespace Endabgabe {
     export abstract class Moveable {
         position: Vector;
         velocity: Vector;
-        isHit: boolean;
-        isLured: boolean;
-        score: number;
 
         constructor() {
             // console.log("constructed");   

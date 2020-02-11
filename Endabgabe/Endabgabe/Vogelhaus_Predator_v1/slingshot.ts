@@ -1,5 +1,5 @@
 namespace Endabgabe {
-    export class Slingshot extends Moveable {
+    export class Snowball extends Moveable {
         aim: Vector;
 
         constructor() {
@@ -15,20 +15,18 @@ namespace Endabgabe {
             let newVelocityY: number = (_mousePosition.y - this.position.y) * 0.09;
             let newVelocity: Vector = new Vector(newVelocityX, newVelocityY);
             this.velocity = newVelocity;
-            // console.log("Slingshot shot.");
         }
 
         reachedTarget(): void {
             if (this.aim && (this.position == this.aim || (this.position.x <= this.aim.x + 10 && this.position.y <= this.aim.y + 10 && this.position.x >= this.aim.x - 10 && this.position.y >= this.aim.y - 10))) {
                 let stop: Vector = new Vector(0, 0);
                 this.velocity = stop;
-                // console.log("Slingshot stopped.")
                 for (let moveable of moveables) {
                     if (moveable instanceof Bird) {
                         moveable.hitBird(this.aim);
                     }
                 }
-                setTimeout(deleteSlingshot, 500);
+                setTimeout(deleteSnowball, 500);
             }
             // drawTarget(this.aim);
         }

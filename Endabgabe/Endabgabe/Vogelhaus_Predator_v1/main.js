@@ -9,26 +9,23 @@ var Endabgabe;
     Endabgabe.highscore = 0;
     console.log("Your Highscore: " + Endabgabe.highscore);
     function handleLoad(_event) {
-        let canvas = document.querySelector("canvas"); //Nachschauen
+        let canvas = document.querySelector("canvas");
         if (!canvas)
             return;
         Endabgabe.crc2 = canvas.getContext("2d");
         Endabgabe.drawBackground();
         Endabgabe.drawSun({ x: 700, y: 75 });
-        Endabgabe.drawCloud({ x: 300, y: 125 }, { x: 350, y: 105 });
-        Endabgabe.drawMountains({ x: 0, y: Endabgabe.crc2.canvas.height * Endabgabe.goldenRatio }, 80, 200, "white", "darkgreen");
-        Endabgabe.drawMountains({ x: 0, y: Endabgabe.crc2.canvas.height * Endabgabe.goldenRatio }, 40, 180, "lightgrey", "grey");
+        Endabgabe.drawCloud({ x: 300, y: 125 }, { x: 400, y: 100 });
+        Endabgabe.drawMountains({ x: 0, y: Endabgabe.crc2.canvas.height * Endabgabe.goldenRatio }, 100, 200, "white", "darkgreen");
+        Endabgabe.drawMountains({ x: 0, y: Endabgabe.crc2.canvas.height * Endabgabe.goldenRatio }, 50, 150, "lightgrey", "grey");
         Endabgabe.drawTree();
-        Endabgabe.drawSnowman({ x: 600, y: 500 });
         Endabgabe.drawBirdhouse();
-        // drawBirdsInTree({ x: 510, y: 400 }, { x: 180, y: 120 });
-        //showScore();
+        Endabgabe.drawSnowman({ x: 600, y: 500 });
         let background = Endabgabe.crc2.getImageData(0, 0, 800, 600);
         drawBirds(25);
         drawSnowflakes(100);
-        // drawPartyBird(3);
-        drawSlingshot();
-        canvas.addEventListener("click", useSlingshot);
+        drawSnowball();
+        canvas.addEventListener("click", throwSnowball);
         canvas.addEventListener("auxclick", throwFood); // nach rechtsklick suchen
         window.setTimeout(endTheGame, 20000);
         window.setInterval(update, 20, background); // triggert alle 20ms die update-Funktion für den Hintergrund & neue Position der animierten Elemente
@@ -47,24 +44,16 @@ var Endabgabe;
             Endabgabe.moveables.push(snowflake);
         }
     }
-    // function drawPartyBird(nBirds: number): void {
-    //     console.log("Party Bird.");
-    //     for (let i: number = 0; i < nBirds; i++) {
-    //         let partyBird: PartyBird = new PartyBird();
-    //         moveables.push(partyBird);
-    //     }
-    // }
     function deleteBird() {
         for (let i = 0; i < Endabgabe.moveables.length; i++) {
-            if (Endabgabe.moveables[i].isHit) {
-                if (Endabgabe.moveables[i].isHit && Endabgabe.moveables[i].isLured) {
-                    Endabgabe.moveables[i].score = 10;
-                    Endabgabe.highscore += Endabgabe.moveables[i].score;
+            let bird = Endabgabe.moveables[i]; // typecast von Moveables zu Bird
+            if (bird.isHit) {
+                if (bird.isEating) {
+                    Endabgabe.highscore += 10;
                     console.log("Your Highscore: " + Endabgabe.highscore);
                 }
-                if (!Endabgabe.moveables[i].isLured) {
-                    Endabgabe.moveables[i].score = 20;
-                    Endabgabe.highscore += Endabgabe.moveables[i].score;
+                if (!bird.isLured) {
+                    Endabgabe.highscore += 25;
                     console.log("Your Highscore: " + Endabgabe.highscore);
                 }
                 Endabgabe.moveables.splice(i, 1);
@@ -73,44 +62,45 @@ var Endabgabe;
         }
     }
     Endabgabe.deleteBird = deleteBird;
-    function drawSlingshot() {
-        //console.log("Slingshot.");
-        let slingShot = new Endabgabe.Slingshot();
-        Endabgabe.moveables.push(slingShot);
+    function drawSnowball() {
+        let snowball = new Endabgabe.Snowball();
+        Endabgabe.moveables.push(snowball);
     }
-    function useSlingshot(_event) {
-        console.log("Slingshot used.");
+    function throwSnowball(_event) {
+        console.log("Snowball thrown");
         let _mousePosition = new Endabgabe.Vector(_event.clientX, _event.clientY);
         for (let moveable of Endabgabe.moveables) {
-            if (moveable instanceof Endabgabe.Slingshot) {
-                // console.log("Slingshot started.");
+            if (moveable instanceof Endabgabe.Snowball) {
                 moveable.targetBird(_mousePosition);
             }
         }
     }
-    function deleteSlingshot() {
+    function deleteSnowball() {
         for (let i = 0; i < Endabgabe.moveables.length; i++) {
-            if (Endabgabe.moveables[i] instanceof Endabgabe.Slingshot) {
+            if (Endabgabe.moveables[i] instanceof Endabgabe.Snowball) {
                 Endabgabe.moveables.splice(i, 1);
                 // console.log("Sling was deleted.");
             }
         }
-        drawSlingshot();
+        drawSnowball();
     }
-    Endabgabe.deleteSlingshot = deleteSlingshot;
+    Endabgabe.deleteSnowball = deleteSnowball;
     function throwFood(_event) {
         console.log("Food thrown.");
         //console.log(_event);
-        let _mousePosition = new Endabgabe.Vector(_event.clientX, _event.clientY);
-        for (let moveable of Endabgabe.moveables) {
-            if (moveable instanceof Endabgabe.Bird && moveable.isLured) {
-                //console.log(moveable.position);
-                moveable.getFood(_mousePosition);
+        if (_event.clientY >= 400 && Endabgabe.highscore >= 20) {
+            let _mousePosition = new Endabgabe.Vector(_event.clientX, _event.clientY);
+            for (let moveable of Endabgabe.moveables) {
+                if (moveable instanceof Endabgabe.Bird && moveable.isLured) {
+                    //console.log(moveable.position);
+                    moveable.getFood(_mousePosition);
+                }
             }
+            let food = new Endabgabe.Food(_mousePosition);
+            Endabgabe.moveables.push(food);
+            Endabgabe.highscore -= 20;
+            setTimeout(deleteFood, 3000);
         }
-        let food = new Endabgabe.Food(_mousePosition);
-        Endabgabe.moveables.push(food);
-        setTimeout(deleteFood, 3000);
     }
     function deleteFood() {
         for (let i = 0; i < Endabgabe.moveables.length; i++) {
@@ -120,18 +110,7 @@ var Endabgabe;
             }
         }
     }
-    // function showScore(): void {
-    //     crc2.fillStyle = "#0f0f0f";
-    //     crc2.fillRect(700, 0, 200, 80);
-    //     crc2.font = "20px Typescript";
-    //     crc2.fillStyle = "white";
-    //     crc2.fillText("Score: ", 660, 25);
-    //     crc2.fillText("" + highscore, 720, 25);
-    //     crc2.font = "20px Typescript";
-    // }
-    // update Background & Animation
     function update(_background) {
-        //console.log("updated");
         Endabgabe.crc2.putImageData(_background, 0, 0);
         for (let moveable of Endabgabe.moveables) {
             moveable.move();
@@ -143,7 +122,7 @@ var Endabgabe;
             }
         }
         for (let moveable of Endabgabe.moveables) {
-            if (moveable instanceof Endabgabe.Slingshot) {
+            if (moveable instanceof Endabgabe.Snowball) {
                 moveable.reachedTarget();
             }
         }
@@ -153,8 +132,6 @@ var Endabgabe;
             }
         }
         Endabgabe.showScore();
-        // drawSlingshotWoodenPart({ x: crc2.canvas.width - 55, y: crc2.canvas.height + 70 });
-        // showScore();
     }
     function endTheGame() {
         let name = prompt("Your Score " + Endabgabe.highscore, "Please enter your name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
@@ -166,7 +143,6 @@ var Endabgabe;
     async function sendHighScore(_name, _highscore) {
         let query = "highscore=" + _highscore + "&name=" + _name;
         let response = await fetch(url + "?" + query);
-        // let responseText: string = await response.text();
         alert(response);
     }
 })(Endabgabe || (Endabgabe = {}));

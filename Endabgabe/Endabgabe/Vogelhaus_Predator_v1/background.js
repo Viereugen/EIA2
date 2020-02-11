@@ -17,7 +17,7 @@ var Endabgabe;
         let r1 = 25;
         let r2 = 100;
         let gradient = Endabgabe.crc2.createRadialGradient(0, 0, r1, 0, 0, r2);
-        gradient.addColorStop(0, "HSLA(90, 100%, 950%, 1");
+        gradient.addColorStop(0, "HSLA(90, 100%, 80%, 1");
         gradient.addColorStop(1, "HSLA(90, 100%, 40%, 0");
         Endabgabe.crc2.save();
         Endabgabe.crc2.translate(_position.x, _position.y);
@@ -30,7 +30,7 @@ var Endabgabe;
     function drawCloud(_position, _size) {
         //console.log("Cloud" + _position, _size);
         let nParticles = 50;
-        let radiusParticle = 45;
+        let radiusParticle = 50;
         let particle = new Path2D();
         let gradient = Endabgabe.crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
         particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
@@ -51,8 +51,8 @@ var Endabgabe;
     }
     Endabgabe.drawCloud = drawCloud;
     function drawMountains(_position, _min, _max, _colorHigh, _colorLow) {
-        let stepMin = 30;
-        let stepMax = 40;
+        let stepMin = 50;
+        let stepMax = 70;
         let x = 0;
         Endabgabe.crc2.save();
         Endabgabe.crc2.translate(_position.x, _position.y);
@@ -77,16 +77,16 @@ var Endabgabe;
     function drawTree() {
         let transform = Endabgabe.crc2.getTransform();
         let nBranches = 100;
-        let maxRadius = 30;
+        let maxRadius = 70;
         let branch = new Path2D();
         branch.arc(200, 470, maxRadius, 0, 2 * Math.PI);
         Endabgabe.crc2.fillStyle = "HSL(15, 90%, 20%)"; // Baumstamm
-        Endabgabe.crc2.fillRect(180, 450, 30, -200);
+        Endabgabe.crc2.fillRect(175, 450, 50, -200);
         Endabgabe.crc2.save();
         Endabgabe.crc2.translate(0, -120);
         do {
             let y = Math.random() * 250;
-            let x = (Math.random() - 0.5) * 6 * maxRadius;
+            let x = (Math.random() - 0.5) * 100;
             Endabgabe.crc2.save();
             Endabgabe.crc2.translate(0, -y);
             Endabgabe.crc2.translate(x, 0);

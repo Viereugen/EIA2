@@ -1,7 +1,7 @@
 "use strict";
 var Endabgabe;
 (function (Endabgabe) {
-    class Slingshot extends Endabgabe.Moveable {
+    class Snowball extends Endabgabe.Moveable {
         constructor() {
             super();
             this.position = new Endabgabe.Vector(Endabgabe.crc2.canvas.width - 60, Endabgabe.crc2.canvas.height - 60);
@@ -14,19 +14,17 @@ var Endabgabe;
             let newVelocityY = (_mousePosition.y - this.position.y) * 0.09;
             let newVelocity = new Endabgabe.Vector(newVelocityX, newVelocityY);
             this.velocity = newVelocity;
-            // console.log("Slingshot shot.");
         }
         reachedTarget() {
             if (this.aim && (this.position == this.aim || (this.position.x <= this.aim.x + 10 && this.position.y <= this.aim.y + 10 && this.position.x >= this.aim.x - 10 && this.position.y >= this.aim.y - 10))) {
                 let stop = new Endabgabe.Vector(0, 0);
                 this.velocity = stop;
-                // console.log("Slingshot stopped.")
                 for (let moveable of Endabgabe.moveables) {
                     if (moveable instanceof Endabgabe.Bird) {
                         moveable.hitBird(this.aim);
                     }
                 }
-                setTimeout(Endabgabe.deleteSlingshot, 500);
+                setTimeout(Endabgabe.deleteSnowball, 500);
             }
             // drawTarget(this.aim);
         }
@@ -43,6 +41,6 @@ var Endabgabe;
             Endabgabe.crc2.closePath();
         }
     }
-    Endabgabe.Slingshot = Slingshot;
+    Endabgabe.Snowball = Snowball;
 })(Endabgabe || (Endabgabe = {}));
 //# sourceMappingURL=slingshot.js.map
