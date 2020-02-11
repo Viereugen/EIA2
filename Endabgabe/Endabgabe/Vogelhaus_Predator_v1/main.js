@@ -128,7 +128,7 @@ var Endabgabe;
         Endabgabe.drawScore();
     }
     function endTheGame() {
-        let name = prompt("Your Score " + Endabgabe.highscore, "Please enter your name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
+        let name = prompt("Your Score " + Endabgabe.highscore + "Please enter your name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
         if (name != null) {
             sendHighScore(name, Endabgabe.highscore);
         }

@@ -158,7 +158,7 @@ namespace Endabgabe {
     }
 
     function endTheGame(): void {
-        let name: any = prompt("Your Score " + highscore, "Please enter your name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
+        let name: any = prompt("Your Score " + highscore + "Please enter your name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
         if (name != null) {
             sendHighScore(name, highscore);
         }
