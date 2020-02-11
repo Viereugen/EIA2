@@ -1,8 +1,6 @@
 namespace Endabgabe {
     window.addEventListener("load", handleLoad);
 
-    let url: string = "https://eiatestapp.herokuapp.com/";
-
     function handleLoad(_event: Event): void {
     document.getElementById("highscoreButton").addEventListener("click", displayHighScore);
     }

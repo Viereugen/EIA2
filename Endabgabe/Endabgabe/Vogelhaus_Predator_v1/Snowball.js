@@ -43,4 +43,4 @@ var Endabgabe;
     }
     Endabgabe.Snowball = Snowball;
 })(Endabgabe || (Endabgabe = {}));
-//# sourceMappingURL=slingshot.js.map
+//# sourceMappingURL=Snowball.js.map

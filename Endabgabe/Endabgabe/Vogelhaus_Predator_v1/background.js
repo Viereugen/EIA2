@@ -1,9 +1,7 @@
 "use strict";
 var Endabgabe;
 (function (Endabgabe) {
-    // Funktionen für alle Hintergrundelemente
     function drawBackground() {
-        //console.log("Background");
         let gradient = Endabgabe.crc2.createLinearGradient(0, 0, 0, Endabgabe.crc2.canvas.height);
         gradient.addColorStop(0, "blue");
         gradient.addColorStop(Endabgabe.goldenRatio, "HSL(100, 30%, 90%)");
@@ -13,7 +11,6 @@ var Endabgabe;
     }
     Endabgabe.drawBackground = drawBackground;
     function drawSun(_position) {
-        //console.log("Sun" + _position);
         let r1 = 25;
         let r2 = 100;
         let gradient = Endabgabe.crc2.createRadialGradient(0, 0, r1, 0, 0, r2);
@@ -28,7 +25,6 @@ var Endabgabe;
     }
     Endabgabe.drawSun = drawSun;
     function drawCloud(_position, _size) {
-        //console.log("Cloud" + _position, _size);
         let nParticles = 50;
         let radiusParticle = 50;
         let particle = new Path2D();
@@ -101,7 +97,6 @@ var Endabgabe;
     }
     Endabgabe.drawTree = drawTree;
     function drawSnowman(_position) {
-        //console.log("Snowman");
         let snowman = new Path2D;
         let r1 = 80;
         let r2 = 50;
@@ -119,9 +114,6 @@ var Endabgabe;
         snowman2.arc(_position.x, y3, r3, 0, 2 * Math.PI);
         Endabgabe.crc2.fillStyle = "white";
         Endabgabe.crc2.fill(snowman2);
-        // let smile: Path2D = new Path2D;
-        // smile.arc(_position.x, y3, 13, 0, Math.PI);
-        // crc2.stroke(smile);
         let eye1 = new Path2D;
         eye1.arc(590, 330, 6, 0, 2 * Math.PI);
         Endabgabe.crc2.fillStyle = "black";
@@ -142,21 +134,20 @@ var Endabgabe;
     }
     Endabgabe.drawSnowman = drawSnowman;
     function drawBirdhouse() {
-        // Gehäuse
         Endabgabe.crc2.save();
         Endabgabe.crc2.translate(0, -120);
         Endabgabe.crc2.fillStyle = "HSL(40, 80%, 25%)";
         Endabgabe.crc2.fillRect(130, 360, 50, -70);
-        // Loch
+        // Hole
         let hole = new Path2D;
         hole.arc(155, 325, 10, 0, 2 * Math.PI);
         Endabgabe.crc2.fillStyle = "black";
         Endabgabe.crc2.fill(hole);
         Endabgabe.crc2.stroke(hole);
-        // Dach
+        // Roof
         Endabgabe.crc2.beginPath();
-        Endabgabe.crc2.moveTo(120, 290); // Strich
-        Endabgabe.crc2.lineTo(155, 250); // Ecke oben
+        Endabgabe.crc2.moveTo(120, 290);
+        Endabgabe.crc2.lineTo(155, 250);
         Endabgabe.crc2.lineTo(190, 290);
         Endabgabe.crc2.closePath();
         Endabgabe.crc2.fillStyle = "HSL(10, 80%, 10%)";
@@ -165,64 +156,7 @@ var Endabgabe;
         Endabgabe.crc2.restore();
     }
     Endabgabe.drawBirdhouse = drawBirdhouse;
-    // export function drawBirdsInTree(_position: VectorBack, _size: VectorBack): void {
-    //     //console.log("Birds in Tree");
-    //     let nBirds: number = 3;
-    //     let radiusBird: number = 10 + Math.random() * 7;
-    //     let bird: Path2D = new Path2D();
-    //     bird.arc(0, 0, radiusBird, 0, 2 * Math.PI);
-    //     let wing: number = 0 - radiusBird;
-    //     bird.arc(wing, 0, radiusBird, 0, 0.5 * Math.PI);
-    //     crc2.stroke(bird);
-    //     let head: number = 0 - radiusBird;
-    //     bird.arc(0, head, (1 / 2) * radiusBird, 0, 2 * Math.PI);
-    //     crc2.save();
-    //     crc2.translate(_position.x, _position.y);
-    //     for (let drawn: number = 0; drawn < nBirds; drawn++) {
-    //         let colorAngle: number = 120 - Math.random() * 290;
-    //         let color: string = "HSLA(" + colorAngle + ", 90%, 50%, 1)";
-    //         crc2.fillStyle = color;
-    //         crc2.save();
-    //         let x: number = Math.random() * _size.x;
-    //         let y: number = - (Math.random() * _size.y);
-    //         crc2.translate(x, y);
-    //         crc2.fill(bird);
-    //         crc2.restore();
-    //     }
-    //     crc2.restore();
-    // }
-    // console.log("Background, Mountains, Sun, Cloud, Tree, Birdhouse and Snowman created.");
-    // export function drawSlingshotWoodenPart(_position: VectorBack): void {
-    //     crc2.beginPath();
-    //     crc2.fillStyle = "HSL(30, 80%, 30%)";
-    //     crc2.fillRect(_position.x, _position.y, 10, 50);
-    //     crc2.stroke();
-    //     crc2.save();
-    //     crc2.closePath();
-    //     crc2.beginPath();
-    //     crc2.moveTo(_position.x, _position.y); // Ecke oben an Stiel
-    //     crc2.lineTo(_position.x, _position.y + 15); // Ecke unten an Stiel
-    //     crc2.lineTo(_position.x - 40, _position.y - 30);
-    //     crc2.lineTo(_position.x - 30, _position.y - 30);
-    //     crc2.fillStyle = "HSL(30, 80%, 30%)";
-    //     crc2.fill();
-    //     crc2.closePath();
-    //     crc2.beginPath();
-    //     crc2.moveTo(_position.x + 10, _position.y); // Ecke oben an Stiel
-    //     crc2.lineTo(_position.x + 10, _position.y + 15); // Ecke unten an Stiel
-    //     crc2.lineTo(_position.x + 50, _position.y - 30);
-    //     crc2.lineTo(_position.x + 40, _position.y - 30);
-    //     crc2.fillStyle = "HSL(30, 80%, 30%)";
-    //     crc2.fill();
-    //     crc2.closePath();
-    //     crc2.beginPath();
-    //     crc2.moveTo(_position.x + 10, _position.y);
-    //     crc2.lineTo(_position.x + 10, _position.y + 15);
-    //     crc2.fillStyle = "HSL(30, 80%, 30%)";
-    //     crc2.fill();
-    //     crc2.closePath();
-    // }
-    function showScore() {
+    function drawScore() {
         Endabgabe.crc2.beginPath();
         //crc2.fillStyle = "darkred";
         Endabgabe.crc2.strokeRect(5, 5, 150, 40);
@@ -230,6 +164,6 @@ var Endabgabe;
         Endabgabe.crc2.fillStyle = "white";
         Endabgabe.crc2.fillText("Punkte: " + Endabgabe.highscore, 20, 30);
     }
-    Endabgabe.showScore = showScore;
+    Endabgabe.drawScore = drawScore;
 })(Endabgabe || (Endabgabe = {}));
 //# sourceMappingURL=background.js.map

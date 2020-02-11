@@ -1,18 +1,17 @@
 "use strict";
 var Endabgabe;
 (function (Endabgabe) {
-    let url = "https://eiatestapp.herokuapp.com/";
-    console.log(url);
     window.addEventListener("load", handleLoad);
     Endabgabe.goldenRatio = 0.62;
     Endabgabe.moveables = [];
     Endabgabe.highscore = 0;
-    console.log("Your Highscore: " + Endabgabe.highscore);
+    Endabgabe.url = "https://eiatestapp.herokuapp.com/";
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
             return;
         Endabgabe.crc2 = canvas.getContext("2d");
+        // Draw everything static
         Endabgabe.drawBackground();
         Endabgabe.drawSun({ x: 700, y: 75 });
         Endabgabe.drawCloud({ x: 300, y: 125 }, { x: 400, y: 100 });
@@ -22,20 +21,14 @@ var Endabgabe;
         Endabgabe.drawBirdhouse();
         Endabgabe.drawSnowman({ x: 600, y: 500 });
         let background = Endabgabe.crc2.getImageData(0, 0, 800, 600);
+        // Draw everything dynamic
         drawBirds(25);
         drawSnowflakes(100);
         drawSnowball();
         canvas.addEventListener("click", throwSnowball);
-        canvas.addEventListener("auxclick", throwFood); // nach rechtsklick suchen
+        canvas.addEventListener("auxclick", throwFood);
         window.setTimeout(endTheGame, 20000);
-        window.setInterval(update, 20, background); // triggert alle 20ms die update-Funktion für den Hintergrund & neue Position der animierten Elemente
-    }
-    function drawBirds(nBirds) {
-        console.log("(Hotdog) birds.");
-        for (let i = 0; i < nBirds; i++) {
-            let bird = new Endabgabe.Bird();
-            Endabgabe.moveables.push(bird);
-        }
+        window.setInterval(update, 20, background); // Update alle 20 ms
     }
     function drawSnowflakes(nSnowflakes) {
         console.log("Snowflakes.");
@@ -44,16 +37,20 @@ var Endabgabe;
             Endabgabe.moveables.push(snowflake);
         }
     }
+    function drawBirds(nBirds) {
+        console.log("(Hotdog) birds.");
+        for (let i = 0; i < nBirds; i++) {
+            let bird = new Endabgabe.Bird();
+            Endabgabe.moveables.push(bird);
+        }
+    }
     function deleteBird() {
         for (let i = 0; i < Endabgabe.moveables.length; i++) {
             let bird = Endabgabe.moveables[i]; // typecast von Moveables zu Bird
             if (bird.isHit) {
-                if (bird.isEating) {
-                    Endabgabe.highscore += 10;
-                    console.log("Your Highscore: " + Endabgabe.highscore);
-                }
-                if (!bird.isLured) {
-                    Endabgabe.highscore += 25;
+                Endabgabe.highscore += 20;
+                if (bird.isEating && bird.isLured) {
+                    Endabgabe.highscore -= 15;
                     console.log("Your Highscore: " + Endabgabe.highscore);
                 }
                 Endabgabe.moveables.splice(i, 1);
@@ -79,26 +76,23 @@ var Endabgabe;
         for (let i = 0; i < Endabgabe.moveables.length; i++) {
             if (Endabgabe.moveables[i] instanceof Endabgabe.Snowball) {
                 Endabgabe.moveables.splice(i, 1);
-                // console.log("Sling was deleted.");
             }
         }
         drawSnowball();
     }
     Endabgabe.deleteSnowball = deleteSnowball;
     function throwFood(_event) {
-        console.log("Food thrown.");
-        //console.log(_event);
+        console.log("Food was thrown");
         if (_event.clientY >= 400 && Endabgabe.highscore >= 20) {
             let _mousePosition = new Endabgabe.Vector(_event.clientX, _event.clientY);
             for (let moveable of Endabgabe.moveables) {
                 if (moveable instanceof Endabgabe.Bird && moveable.isLured) {
-                    //console.log(moveable.position);
                     moveable.getFood(_mousePosition);
                 }
             }
             let food = new Endabgabe.Food(_mousePosition);
             Endabgabe.moveables.push(food);
-            Endabgabe.highscore -= 20;
+            Endabgabe.highscore -= 10;
             setTimeout(deleteFood, 3000);
         }
     }
@@ -131,7 +125,7 @@ var Endabgabe;
                 deleteBird();
             }
         }
-        Endabgabe.showScore();
+        Endabgabe.drawScore();
     }
     function endTheGame() {
         let name = prompt("Your Score " + Endabgabe.highscore, "Please enter your name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
@@ -142,7 +136,7 @@ var Endabgabe;
     }
     async function sendHighScore(_name, _highscore) {
         let query = "highscore=" + _highscore + "&name=" + _name;
-        let response = await fetch(url + "?" + query);
+        let response = await fetch(Endabgabe.url + "?" + query);
         alert(response);
     }
 })(Endabgabe || (Endabgabe = {}));

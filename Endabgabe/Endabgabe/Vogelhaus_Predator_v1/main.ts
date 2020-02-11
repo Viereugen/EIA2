@@ -1,20 +1,16 @@
 namespace Endabgabe {
-    export interface VectorBack {
+    export interface BackgroundVektor {
         x: number;
         y: number;
     }
 
-    let url: string = "https://eiatestapp.herokuapp.com/";
-    console.log(url);
-
     window.addEventListener("load", handleLoad);
     export let crc2: CanvasRenderingContext2D;
     export let goldenRatio: number = 0.62;
-
     export let moveables: Moveable[] = [];
-
     export let highscore: number = 0;
-    console.log("Your Highscore: " + highscore);
+    export let url: string = "https://eiatestapp.herokuapp.com/";
+
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
@@ -22,6 +18,7 @@ namespace Endabgabe {
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
+        // Draw everything static
         drawBackground();
         drawSun({ x: 700, y: 75 });
         drawCloud({ x: 300, y: 125 }, { x: 400, y: 100 });
@@ -30,28 +27,21 @@ namespace Endabgabe {
         drawTree();
         drawBirdhouse();
         drawSnowman({ x: 600, y: 500 });
-
         let background: ImageData = crc2.getImageData(0, 0, 800, 600);
 
+        // Draw everything dynamic
         drawBirds(25);
         drawSnowflakes(100);
         drawSnowball();
         canvas.addEventListener("click", throwSnowball);
-        canvas.addEventListener("auxclick", throwFood); // nach rechtsklick suchen
+        canvas.addEventListener("auxclick", throwFood);
 
         window.setTimeout(endTheGame, 20000);
 
-        window.setInterval(update, 20, background); // triggert alle 20ms die update-Funktion für den Hintergrund & neue Position der animierten Elemente
+        window.setInterval(update, 20, background); // Update alle 20 ms
     }
 
-    function drawBirds(nBirds: number): void {
-        console.log("(Hotdog) birds.");
 
-        for (let i: number = 0; i < nBirds; i++) {
-            let bird: Bird = new Bird();
-            moveables.push(bird);
-        }
-    }
 
     function drawSnowflakes(nSnowflakes: number): void {
         console.log("Snowflakes.");
@@ -63,16 +53,22 @@ namespace Endabgabe {
     }
 
 
+
+    function drawBirds(nBirds: number): void {
+        console.log("(Hotdog) birds.");
+
+        for (let i: number = 0; i < nBirds; i++) {
+            let bird: Bird = new Bird();
+            moveables.push(bird);
+        }
+    }
     export function deleteBird(): void {                
         for (let i: number = 0; i < moveables.length; i++) {
             let bird: Bird = moveables[i] as Bird; // typecast von Moveables zu Bird
             if (bird.isHit) {
-                if (bird.isEating) {
-                    highscore += 10;
-                    console.log("Your Highscore: " + highscore);
-                }
-                if (!bird.isLured) {
-                    highscore += 25;
+                highscore += 20;
+                if (bird.isEating && bird.isLured) {
+                    highscore -= 15;
                     console.log("Your Highscore: " + highscore);
                 }
                 moveables.splice(i, 1);
@@ -81,11 +77,11 @@ namespace Endabgabe {
         }
     }
 
+
     function drawSnowball(): void {
         let snowball: Snowball = new Snowball();
         moveables.push(snowball);
     }
-
 
     function throwSnowball(_event: MouseEvent): void {
         console.log("Snowball thrown");
@@ -101,27 +97,23 @@ namespace Endabgabe {
         for (let i: number = 0; i < moveables.length; i++) {
             if (moveables[i] instanceof Snowball) {
                 moveables.splice(i, 1);
-                // console.log("Sling was deleted.");
             }
         }
         drawSnowball();
     }
 
     function throwFood(_event: MouseEvent): void {
-
-        console.log("Food thrown.");
-        //console.log(_event);
+        console.log("Food was thrown");
         if (_event.clientY >= 400 && highscore >= 20) {
             let _mousePosition: Vector = new Vector(_event.clientX, _event.clientY);
             for (let moveable of moveables) {
                 if (moveable instanceof Bird && moveable.isLured) {
-                    //console.log(moveable.position);
                     moveable.getFood(_mousePosition);
                 }
             }
             let food: Food = new Food(_mousePosition);
             moveables.push(food);
-            highscore -= 20;
+            highscore -= 10;
             setTimeout(deleteFood, 3000);
         }
     }
@@ -161,7 +153,7 @@ namespace Endabgabe {
                 deleteBird();
             }
         }
-        showScore();
+        drawScore();
     }
 
     function endTheGame(): void {

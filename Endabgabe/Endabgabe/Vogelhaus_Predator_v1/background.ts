@@ -1,8 +1,6 @@
 namespace Endabgabe {
 
-    // Funktionen für alle Hintergrundelemente
     export function drawBackground(): void {
-        //console.log("Background");
 
         let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
         gradient.addColorStop(0, "blue");
@@ -13,8 +11,7 @@ namespace Endabgabe {
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
     }
 
-    export function drawSun(_position: VectorBack): void {
-        //console.log("Sun" + _position);
+    export function drawSun(_position: BackgroundVektor): void {
 
         let r1: number = 25;
         let r2: number = 100;
@@ -31,8 +28,7 @@ namespace Endabgabe {
         crc2.restore();
     }
 
-    export function drawCloud(_position: VectorBack, _size: VectorBack): void {
-        //console.log("Cloud" + _position, _size);
+    export function drawCloud(_position: BackgroundVektor, _size: BackgroundVektor): void {
         let nParticles: number = 50;
         let radiusParticle: number = 50;
         let particle: Path2D = new Path2D();
@@ -58,7 +54,7 @@ namespace Endabgabe {
         crc2.restore();
     }
 
-    export function drawMountains(_position: VectorBack, _min: number, _max: number, _colorHigh: string, _colorLow: string): void {
+    export function drawMountains(_position: BackgroundVektor, _min: number, _max: number, _colorHigh: string, _colorLow: string): void {
         let stepMin: number = 50;
         let stepMax: number = 70;
         let x: number = 0;
@@ -123,8 +119,7 @@ namespace Endabgabe {
         crc2.setTransform(transform);
     }
 
-    export function drawSnowman(_position: VectorBack): void {
-        //console.log("Snowman");
+    export function drawSnowman(_position: BackgroundVektor): void {
 
         let snowman: Path2D = new Path2D;
         let r1: number = 80;
@@ -149,11 +144,6 @@ namespace Endabgabe {
         snowman2.arc(_position.x, y3, r3, 0, 2 * Math.PI);
         crc2.fillStyle = "white";
         crc2.fill(snowman2);
-
-        // let smile: Path2D = new Path2D;
-
-        // smile.arc(_position.x, y3, 13, 0, Math.PI);
-        // crc2.stroke(smile);
 
         let eye1: Path2D = new Path2D;
 
@@ -185,13 +175,12 @@ namespace Endabgabe {
 
     export function drawBirdhouse(): void {
 
-        // Gehäuse
         crc2.save();
         crc2.translate(0, -120);
         crc2.fillStyle = "HSL(40, 80%, 25%)";
         crc2.fillRect(130, 360, 50, -70);
 
-        // Loch
+        // Hole
         let hole: Path2D = new Path2D;
 
         hole.arc(155, 325, 10, 0, 2 * Math.PI);
@@ -199,10 +188,10 @@ namespace Endabgabe {
         crc2.fill(hole);
         crc2.stroke(hole);
 
-        // Dach
+        // Roof
         crc2.beginPath();
-        crc2.moveTo(120, 290); // Strich
-        crc2.lineTo(155, 250); // Ecke oben
+        crc2.moveTo(120, 290); 
+        crc2.lineTo(155, 250); 
         crc2.lineTo(190, 290);
         crc2.closePath();
         crc2.fillStyle = "HSL(10, 80%, 10%)";
@@ -212,76 +201,8 @@ namespace Endabgabe {
 
     }
 
-    // export function drawBirdsInTree(_position: VectorBack, _size: VectorBack): void {
-    //     //console.log("Birds in Tree");
-
-    //     let nBirds: number = 3;
-    //     let radiusBird: number = 10 + Math.random() * 7;
-    //     let bird: Path2D = new Path2D();
-
-    //     bird.arc(0, 0, radiusBird, 0, 2 * Math.PI);
-
-    //     let wing: number = 0 - radiusBird;
-    //     bird.arc(wing, 0, radiusBird, 0, 0.5 * Math.PI);
-    //     crc2.stroke(bird);
-
-    //     let head: number = 0 - radiusBird;
-    //     bird.arc(0, head, (1 / 2) * radiusBird, 0, 2 * Math.PI);
-
-    //     crc2.save();
-    //     crc2.translate(_position.x, _position.y);
-
-
-    //     for (let drawn: number = 0; drawn < nBirds; drawn++) {
-    //         let colorAngle: number = 120 - Math.random() * 290;
-    //         let color: string = "HSLA(" + colorAngle + ", 90%, 50%, 1)";
-    //         crc2.fillStyle = color;
-    //         crc2.save();
-    //         let x: number = Math.random() * _size.x;
-    //         let y: number = - (Math.random() * _size.y);
-    //         crc2.translate(x, y);
-    //         crc2.fill(bird);
-    //         crc2.restore();
-    //     }
-    //     crc2.restore();
-    // }
-    // console.log("Background, Mountains, Sun, Cloud, Tree, Birdhouse and Snowman created.");
-
-    // export function drawSlingshotWoodenPart(_position: VectorBack): void {
-    //     crc2.beginPath();
-    //     crc2.fillStyle = "HSL(30, 80%, 30%)";
-    //     crc2.fillRect(_position.x, _position.y, 10, 50);
-    //     crc2.stroke();
-    //     crc2.save();
-    //     crc2.closePath();
-
-    //     crc2.beginPath();
-    //     crc2.moveTo(_position.x, _position.y); // Ecke oben an Stiel
-    //     crc2.lineTo(_position.x, _position.y + 15); // Ecke unten an Stiel
-    //     crc2.lineTo(_position.x - 40, _position.y - 30);
-    //     crc2.lineTo(_position.x - 30, _position.y - 30);
-    //     crc2.fillStyle = "HSL(30, 80%, 30%)";
-    //     crc2.fill();
-    //     crc2.closePath();
-
-    //     crc2.beginPath();
-    //     crc2.moveTo(_position.x + 10, _position.y); // Ecke oben an Stiel
-    //     crc2.lineTo(_position.x + 10, _position.y + 15); // Ecke unten an Stiel
-    //     crc2.lineTo(_position.x + 50, _position.y - 30);
-    //     crc2.lineTo(_position.x + 40, _position.y - 30);
-    //     crc2.fillStyle = "HSL(30, 80%, 30%)";
-    //     crc2.fill();
-    //     crc2.closePath();
-
-    //     crc2.beginPath();
-    //     crc2.moveTo(_position.x + 10, _position.y);
-    //     crc2.lineTo(_position.x + 10, _position.y + 15);
-    //     crc2.fillStyle = "HSL(30, 80%, 30%)";
-    //     crc2.fill();
-    //     crc2.closePath();
-    // }
-
-    export function showScore(): void {
+    
+    export function drawScore(): void {
         crc2.beginPath();
         //crc2.fillStyle = "darkred";
         crc2.strokeRect(5, 5, 150, 40);
