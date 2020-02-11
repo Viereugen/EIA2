@@ -6,7 +6,6 @@ var Endabgabe;
     function handleLoad(_event) {
         document.getElementById("highscoreButton").addEventListener("click", displayHighScore);
     }
-    //
     async function displayHighScore(_event) {
         let query = "command=retrieve";
         let response = await fetch(url + "?" + query);
