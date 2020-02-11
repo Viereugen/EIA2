@@ -13,6 +13,15 @@ namespace Endabgabe {
         let responseText: string = await response.text();
         
         let highscorelists: HTMLDivElement = <HTMLDivElement>document.querySelector("div#serverResponse");
-        highscorelists.innerText = responseText;
+        // highscorelists.innerText = responseText;
+
+        let allEntries: any[] = JSON.parse(responseText);
+
+        for (let entry of allEntries) {
+            let paragraph: HTMLParagraphElement = document.createElement("p");
+            paragraph.innerText = entry.name + ": " + entry.highscore + " Points";
+            highscorelists.appendChild(paragraph);
+        }
+
     }
 }

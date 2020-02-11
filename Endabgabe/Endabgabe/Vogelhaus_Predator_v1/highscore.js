@@ -11,7 +11,13 @@ var Endabgabe;
         let response = await fetch(url + "?" + query);
         let responseText = await response.text();
         let highscorelists = document.querySelector("div#serverResponse");
-        highscorelists.innerText = responseText;
+        // highscorelists.innerText = responseText;
+        let allEntries = JSON.parse(responseText);
+        for (let entry of allEntries) {
+            let paragraph = document.createElement("p");
+            paragraph.innerText = entry.name + ": " + entry.highscore + " Points";
+            highscorelists.appendChild(paragraph);
+        }
     }
 })(Endabgabe || (Endabgabe = {}));
 //# sourceMappingURL=highscore.js.map
