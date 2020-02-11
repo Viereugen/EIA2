@@ -3,9 +3,7 @@ namespace Endabgabe {
         position: Vector;
         velocity: Vector;
 
-        constructor() {
-            // console.log("constructed");   
-                     
+        constructor() {                     
             let x: number = 800 * Math.random();
             let y: number = 700 * goldenRatio * Math.random();
             this.position = new Vector(x, y);
@@ -15,10 +13,9 @@ namespace Endabgabe {
         }
 
         move(): void {
-            //console.log("moved");
             this.position.add(this.velocity);
 
-            //Vogel-Endless-Schleife
+            //Bird-Loop
             if (this.position.x < -50)
                 this.position.x += crc2.canvas.width;
             if (this.position.y < 0)

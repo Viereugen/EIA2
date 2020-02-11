@@ -28,4 +28,4 @@ var Endabgabe;
     }
     Endabgabe.Snowflake = Snowflake;
 })(Endabgabe || (Endabgabe = {}));
-//# sourceMappingURL=snowflake.js.map
+//# sourceMappingURL=Snowflake.js.map
