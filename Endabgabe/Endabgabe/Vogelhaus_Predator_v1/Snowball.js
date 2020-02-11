@@ -22,7 +22,7 @@ var Endabgabe;
                 this.velocity = stop;
                 for (let moveable of Endabgabe.moveables) {
                     if (moveable instanceof Endabgabe.Bird) {
-                        moveable.hitBird(this.aim);
+                        moveable.hitBird(this.position);
                     }
                 }
                 setTimeout(Endabgabe.deleteSnowball, 500);

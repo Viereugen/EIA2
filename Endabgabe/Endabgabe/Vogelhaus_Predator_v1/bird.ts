@@ -7,9 +7,8 @@ namespace Endabgabe {
         isHit: boolean;
 
         constructor() {
-            super();
-            // Speed & Direction
-            
+
+            super();            
             this.velocity = new Vector(Math.random() * -2, -1 + Math.random() * 3);
             this.color = Bird.getRandomColor();
 
@@ -47,7 +46,7 @@ namespace Endabgabe {
                 this.aim = new Vector(1000, 1000);
 
 
-                setTimeout(this.changeDirection, 1300);
+                setTimeout(this.changeDirection, 2000);
             }
         }
 

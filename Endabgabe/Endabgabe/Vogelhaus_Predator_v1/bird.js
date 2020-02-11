@@ -4,7 +4,6 @@ var Endabgabe;
     class Bird extends Endabgabe.Moveable {
         constructor() {
             super();
-            // Speed & Direction
             this.velocity = new Endabgabe.Vector(Math.random() * -2, -1 + Math.random() * 3);
             this.color = Bird.getRandomColor();
             // hungrige Vögel
@@ -36,7 +35,7 @@ var Endabgabe;
                 let stop = new Endabgabe.Vector(0, 0);
                 this.velocity = stop;
                 this.aim = new Endabgabe.Vector(1000, 1000);
-                setTimeout(this.changeDirection, 1300);
+                setTimeout(this.changeDirection, 2000);
             }
         }
         changeDirection() {

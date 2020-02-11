@@ -23,7 +23,7 @@ namespace Endabgabe {
                 this.velocity = stop;
                 for (let moveable of moveables) {
                     if (moveable instanceof Bird) {
-                        moveable.hitBird(this.aim);
+                        moveable.hitBird(this.position);
                     }
                 }
                 setTimeout(deleteSnowball, 500);
