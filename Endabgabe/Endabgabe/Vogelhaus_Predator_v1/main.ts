@@ -4,12 +4,13 @@ namespace Endabgabe {
         y: number;
     }
 
+    let url: string = "https://eiatestapp.herokuapp.com/";
+
     window.addEventListener("load", handleLoad);
     export let crc2: CanvasRenderingContext2D;
     export let goldenRatio: number = 0.62;
     export let moveables: Moveable[] = [];
     export let highscore: number = 0;
-    export let url: string = "https://eiatestapp.herokuapp.com/";
 
 
     function handleLoad(_event: Event): void {

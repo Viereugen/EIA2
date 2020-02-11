@@ -1,11 +1,11 @@
 "use strict";
 var Endabgabe;
 (function (Endabgabe) {
+    let url = "https://eiatestapp.herokuapp.com/";
     window.addEventListener("load", handleLoad);
     Endabgabe.goldenRatio = 0.62;
     Endabgabe.moveables = [];
     Endabgabe.highscore = 0;
-    Endabgabe.url = "https://eiatestapp.herokuapp.com/";
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
@@ -136,7 +136,7 @@ var Endabgabe;
     }
     async function sendHighScore(_name, _highscore) {
         let query = "highscore=" + _highscore + "&name=" + _name;
-        let response = await fetch(Endabgabe.url + "?" + query);
+        let response = await fetch(url + "?" + query);
         alert(response);
     }
 })(Endabgabe || (Endabgabe = {}));
