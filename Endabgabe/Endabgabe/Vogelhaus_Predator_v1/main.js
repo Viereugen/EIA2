@@ -106,7 +106,7 @@ var Endabgabe;
         let name = prompt("Your Score: " + Endabgabe.highscore + "\nEnter your Name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
         if (name != null) {
             sendHighScore(name, Endabgabe.highscore);
-            alert("Entry created.");
+            alert("Thank you for playing!");
         }
     }
     async function sendHighScore(_name, _highscore) {

@@ -53,7 +53,7 @@ var Endabgabe;
         _response.end();
     }
     async function retrieveHighscore() {
-        let cursor = await highscore.find();
+        let cursor = await highscore.find().sort({ highscore: -1 }); // Geänderte sort?
         let answer = await cursor.toArray();
         console.log("DB CursorToArray", answer);
         if (answer != null) {

@@ -133,7 +133,7 @@ namespace Endabgabe {
         let name: string | null = prompt("Your Score: " + highscore + "\nEnter your Name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
         if (name != null) {
             sendHighScore(name, highscore);
-            alert("Entry created.");
+            alert("Thank you for playing!");
         }
     }
 
