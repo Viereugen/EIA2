@@ -52,7 +52,6 @@ namespace Endabgabe {
 
         changeDirection(): void {
             for (let i: number = 0; i <= moveables.length; i++) {
-
                 if (moveables[i] instanceof Bird) {
                     let bird: Bird = moveables[i] as Bird;
                     if (bird.isHungry) {
