@@ -8,6 +8,7 @@ var Endabgabe;
             // Geschwindigkeit & Richtung
             this.velocity = new Endabgabe.Vector(0, 0);
         }
+        //
         draw() {
             for (let i = 0; i < 10; i++) {
                 Endabgabe.crc2.beginPath();

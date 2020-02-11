@@ -20,7 +20,7 @@ export namespace Endabgabe {
     console.log("Server starting on port: " + port);
 
     connectToDatabase(databaseURL);
-
+ //
     function startServer(_port: number | string): void {
         let server: Http.Server = Http.createServer();
         server.listen(_port);

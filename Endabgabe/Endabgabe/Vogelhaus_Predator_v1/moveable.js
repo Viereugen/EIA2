@@ -22,9 +22,9 @@ var Endabgabe;
                 this.position.y -= Endabgabe.crc2.canvas.height;
         }
         draw() {
-            //console.log("draw");
+            //console.log("draw it");
         }
     }
     Endabgabe.Moveable = Moveable;
 })(Endabgabe || (Endabgabe = {}));
-//# sourceMappingURL=Moveable.js.map
+//# sourceMappingURL=moveable.js.map

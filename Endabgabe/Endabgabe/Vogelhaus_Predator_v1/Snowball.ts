@@ -8,7 +8,7 @@ namespace Endabgabe {
             // Geschwindigkeit & Richtung
             this.velocity = new Vector(0, 0);
         }
-
+        //
         targetBird(_mousePosition: Vector): void {
             this.aim = _mousePosition;
             let newVelocityX: number = (_mousePosition.x - this.position.x) * 0.09;

@@ -8,6 +8,7 @@ var Endabgabe;
             // Geschwindigkeit & Richtung
             this.velocity = new Endabgabe.Vector(0, 0);
         }
+        //
         targetBird(_mousePosition) {
             this.aim = _mousePosition;
             let newVelocityX = (_mousePosition.x - this.position.x) * 0.09;

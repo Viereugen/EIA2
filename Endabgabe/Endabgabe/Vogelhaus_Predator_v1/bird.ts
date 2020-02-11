@@ -73,7 +73,7 @@ namespace Endabgabe {
                 console.log("Bird is hit: " + this.isHit);
             }
         }
-
+        //
         draw(): void {
 
             //laufende Vögel

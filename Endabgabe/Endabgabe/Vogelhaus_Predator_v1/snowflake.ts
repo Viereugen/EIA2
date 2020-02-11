@@ -3,7 +3,6 @@ namespace Endabgabe {
         
         constructor() {
             super();
-            // console.log("constructed");
 
             // Geschwindigkeit & Richtung
             let a: number = Math.random() * 1.5;
@@ -12,7 +11,6 @@ namespace Endabgabe {
         }
 
         draw(): void {
-            //console.log("drawn");
 
             let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, 13);
 

@@ -59,6 +59,7 @@ var Endabgabe;
                 console.log("Bird is hit: " + this.isHit);
             }
         }
+        //
         draw() {
             //laufende Vögel
             if (this.position.y >= 400) {

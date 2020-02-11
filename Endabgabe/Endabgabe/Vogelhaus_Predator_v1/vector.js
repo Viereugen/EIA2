@@ -9,6 +9,7 @@ var Endabgabe;
             this.x = _x;
             this.y = _y;
         }
+        //
         scale(_factor) {
             this.x *= _factor;
             this.y *= _factor;

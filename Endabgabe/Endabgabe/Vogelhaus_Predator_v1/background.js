@@ -10,6 +10,7 @@ var Endabgabe;
         Endabgabe.crc2.fillRect(0, 0, Endabgabe.crc2.canvas.width, Endabgabe.crc2.canvas.height);
     }
     Endabgabe.drawBackground = drawBackground;
+    //
     function drawSun(_position) {
         let r1 = 25;
         let r2 = 100;

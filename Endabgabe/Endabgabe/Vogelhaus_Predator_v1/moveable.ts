@@ -27,7 +27,7 @@ namespace Endabgabe {
             }
 
         draw(): void {
-            //console.log("draw");
+            //console.log("draw it");
         }
     }
 }

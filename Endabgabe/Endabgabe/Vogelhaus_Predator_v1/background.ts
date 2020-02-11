@@ -10,7 +10,7 @@ namespace Endabgabe {
         crc2.fillStyle = gradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
     }
-
+//
     export function drawSun(_position: BackgroundVektor): void {
 
         let r1: number = 25;

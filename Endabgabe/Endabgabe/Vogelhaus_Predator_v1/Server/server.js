@@ -16,6 +16,7 @@ var Endabgabe;
     startServer(port);
     console.log("Server starting on port: " + port);
     connectToDatabase(databaseURL);
+    //
     function startServer(_port) {
         let server = Http.createServer();
         server.listen(_port);

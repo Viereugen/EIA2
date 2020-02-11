@@ -7,7 +7,7 @@ namespace Endabgabe {
             // Geschwindigkeit & Richtung
             this.velocity = new Vector(0, 0);
         }
-
+//
         draw(): void {
 
             for (let i: number = 0; i < 10 ; i++) {

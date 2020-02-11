@@ -4,14 +4,12 @@ var Endabgabe;
     class Snowflake extends Endabgabe.Moveable {
         constructor() {
             super();
-            // console.log("constructed");
             // Geschwindigkeit & Richtung
             let a = Math.random() * 1.5;
             let b = Math.random() * 7;
             this.velocity = new Endabgabe.Vector(a, b);
         }
         draw() {
-            //console.log("drawn");
             let gradient = Endabgabe.crc2.createRadialGradient(0, 0, 0, 0, 0, 13);
             Endabgabe.crc2.beginPath();
             Endabgabe.crc2.save();
@@ -28,4 +26,4 @@ var Endabgabe;
     }
     Endabgabe.Snowflake = Snowflake;
 })(Endabgabe || (Endabgabe = {}));
-//# sourceMappingURL=Snowflake.js.map
+//# sourceMappingURL=snowflake.js.map
