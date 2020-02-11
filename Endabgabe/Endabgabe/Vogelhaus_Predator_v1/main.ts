@@ -130,17 +130,17 @@ namespace Endabgabe {
 
 
     function endTheGame(): void {
-        let name: any = prompt("Your Score: " + highscore + "\nEnter your Name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
+        let name: string | null = prompt("Your Score: " + highscore + "\nEnter your Name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
         if (name != null) {
             sendHighScore(name, highscore);
+            alert("Entry created.");
         }
-        window.open("https://viereugen.github.io/EIA2/Endabgabe/Endabgabe/Vogelhaus_Predator_v1/startseite.html", "_self");
     }
 
     async function sendHighScore(_name: string, _highscore: number): Promise<void> {
         let query: string = "highscore=" + _highscore + "&name=" + _name;
-        let response: Response = await fetch(url + "?" + query);
-        alert(response);
+        await fetch(url + "?" + query);
+        window.open("https://viereugen.github.io/EIA2/Endabgabe/Endabgabe/Vogelhaus_Predator_v1/startseite.html", "_self");
     }
 
 

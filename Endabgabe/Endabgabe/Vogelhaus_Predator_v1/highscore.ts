@@ -11,8 +11,6 @@ namespace Endabgabe {
         let query: string = "command=retrieve";
         let response: Response = await fetch(url + "?" + query);
         let responseText: string = await response.text();
-
-        
         
         let highscorelists: HTMLDivElement = <HTMLDivElement>document.querySelector("div#serverResponse");
         highscorelists.innerText = responseText;

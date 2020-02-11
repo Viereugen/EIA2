@@ -1,0 +1,30 @@
+
+body{
+  clear:left;
+  background-color: rgb(85, 94, 103);
+  margin: 0;
+}
+
+footer{
+  width: 100%;
+  background-color: black;
+  color:white;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  text-align: center;
+}
+
+p{
+   font-size: 3em;
+   color: #99aabb;
+   font-family: Arial, Helvetica, sans-serif;
+   text-align: center;
+}
+
+h1{
+   font-size: 3.5em;
+   color: #ffffff;
+   font-family:'Times New Roman', Times, serif;
+   text-align: center;
+   padding: 30px;
+} 

@@ -106,13 +106,13 @@ var Endabgabe;
         let name = prompt("Your Score: " + Endabgabe.highscore + "\nEnter your Name"); //dann beides in Datenbank! und wenn es ausgefüllt wurde zurück zur startseite!!
         if (name != null) {
             sendHighScore(name, Endabgabe.highscore);
+            alert("Entry created.");
         }
-        window.open("https://viereugen.github.io/EIA2/Endabgabe/Endabgabe/Vogelhaus_Predator_v1/startseite.html", "_self");
     }
     async function sendHighScore(_name, _highscore) {
         let query = "highscore=" + _highscore + "&name=" + _name;
-        let response = await fetch(url + "?" + query);
-        alert(response);
+        await fetch(url + "?" + query);
+        window.open("https://viereugen.github.io/EIA2/Endabgabe/Endabgabe/Vogelhaus_Predator_v1/startseite.html", "_self");
     }
     function update(_background) {
         Endabgabe.crc2.putImageData(_background, 0, 0);
